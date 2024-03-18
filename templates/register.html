@@ -1,0 +1,13 @@
+{% block body%}
+    <h1 id="register-title">CompDecks</h1>
+    <form action="/register" method="post" id="register-form">
+        <input autocomplete="off" autofocus id="username" name="username" placeholder="Username" type="text">
+        <input id="password" name="password" placeholder="Password" type="password">
+        <input id="password" name="confirmation" placeholder="Confirmation" type="password">
+        <button type="submit" id="register-btn">Register</button>
+    </form>
+    <div>
+        <br>
+        <p>Already have an account? <a href="/login">Log In</a></p>
+    </div>
+{% endblock body%}
