@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+
+    {% block css %}
+    <link href="/static/main.css" rel="stylesheet">
+    {% endblock %}
+
+
+    <title>CompDecks | {% block title %}{% endblock %}</title>
+
+</head>
+
+<body>
+    <div class="hero">
+        {% if session["uuid"] %}
+        <form action="/logout" method="get">
+            <button type="submit" id="logout-btn" class="btn btn-danger">Log Out</button>
+        </form>
+        {% endif %}
+    </div>
+    <div class="body">
+        {% block body %}{% endblock %}
+    </div>
+</body>
+
+</html>
