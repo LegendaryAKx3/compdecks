@@ -3,16 +3,19 @@ const colors = require('tailwindcss/colors')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./templates/**/*.html"],
-  corePlugins: [
-    "fontSmoothing",
-    "fontFamily",
-    "fontSize",
-    "accessibility",
-    "flex",
-    "gap",
-    "margin",
-    "padding",
-  ],
+  // corePlugins: [
+  //   "fontSmoothing",
+  //   "fontFamily",
+  //   "fontSize",
+  //   "accessibility",
+  //   "flex",
+  //   "verticalAlign",
+  //   "gap",
+  //   "margin",
+  //   "padding",
+  //   "justifyContent",
+  //   "alignContent",
+  // ],
   theme: {
     colors: {
       transparent: 'transparent',

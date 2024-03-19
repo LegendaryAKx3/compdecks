@@ -2,16 +2,26 @@
 {% block title %}Login{% endblock %} 
 
 {% block body %}
-    <h1>CompDecks</h1>
-
-    <form action="/login" method="post">
-        <input autocomplete="off" autofocus name="username" placeholder="Username" type="text">
-        <input name="password" placeholder="Password" type="password">
-        <button type="submit">Log in</button>
-    </form>
-
     <div>
-        <br>
-        <p>Don't have an account? <a href="/register">Sign Up</a></p>
+        <div class="min-h-screen w-full justify-center flex flex-col items-center">
+            <h1 class="text-2xl font-bold text-black text-center mb-4">CompDecks</h1>
+            <form class="flex flex-col gap-2" action="/login" method="post">
+
+                <label>Username</label>
+                <input class="shadow-sm rounded-md w-full px-3 py-1 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" autocomplete="off" autofocus name="username" placeholder="your@email.com" type="text" required>
+                <label for="password">Password</label>
+                <input class="shadow-sm rounded-md w-full px-3 py-1 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" name="password" placeholder="Enter your password" type="password" required>
+
+                <!--change color?-->
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Login</button>
+
+            </form>
+
+            <div>
+                <br>
+                <!--make blue link-->
+                <p>Don't have an account? <a href="/register">Sign Up</a></p>
+            </div>
+        </div>
     </div>
 {% endblock %}
