@@ -10,7 +10,9 @@
 			"extensions": [
 				"esbenp.prettier-vscode",
 				"ms-python.python",
-				"ms-python.black-formatter"
+				"ms-python.black-formatter",
+				"bradlc.vscode-tailwindcss",
+				"wholroyd.jinja"
 			]
 		}
 	}

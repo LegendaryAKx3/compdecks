@@ -161,3 +161,4 @@ cython_debug/
 
 flask_session
 node_modules
+static/output.css
