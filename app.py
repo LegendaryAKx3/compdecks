@@ -107,7 +107,7 @@ def register():
         db.execute(
             "INSERT INTO accounts (username, hash) VALUES(?, ?);",
             username,
-            generate_password_hash(password),
+            generate_password_hash(password)
         )
         conn.commit()
         conn.close()
