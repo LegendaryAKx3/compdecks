@@ -1,5 +1,13 @@
 from functools import wraps
-from flask import Flask, render_template, redirect, render_template, request, session, flash
+from flask import (
+    Flask,
+    render_template,
+    redirect,
+    render_template,
+    request,
+    session,
+    flash,
+)
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_session import Session
 import sqlite3
@@ -10,10 +18,12 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+
 def connect_db():
     connection = sqlite3.connect("CD.db")
     connection.row_factory = sqlite3.Row
     return connection
+
 
 def login_required(f):
     """Code from CS50 finance"""
@@ -26,10 +36,12 @@ def login_required(f):
 
     return decorated_function
 
+
 @app.route("/")
 @login_required
 def hello_world():
     return render_template("index.html", title="Hello")
+
 
 # NOT WORKING CODE, NEEDS TO BE UPDATED FOR SQLITE3 LIBRARY
 @app.route("/login")
@@ -44,9 +56,7 @@ def login():
         # Check both username and password are submitted
         if (not request.form.get("username")) or (not request.form.get("password")):
             flash("Improper form submission")
-            return render_template(
-                "login.html")
-            
+            return render_template("login.html")
 
         user = db.execute(
             "SELECT * FROM accounts WHERE username = ?", request.form.get("username")
@@ -68,6 +78,7 @@ def login():
     else:
         return render_template("login.html")
 
+
 # ALSO NEEDS TO BE UPDATED FOR SQLITE3
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -82,9 +93,7 @@ def register():
 
         if not username:
             flash("Username cannot be empty")
-            return render_template(
-                "register.html"
-            )
+            return render_template("register.html")
 
         for entry in db.execute("SELECT username FROM accounts;"):
             if username == entry["username"]:
@@ -107,12 +116,13 @@ def register():
         db.execute(
             "INSERT INTO accounts (username, hash) VALUES(?, ?);",
             username,
-            generate_password_hash(password)
+            generate_password_hash(password),
         )
         conn.commit()
         conn.close()
         return redirect("/")
     return render_template("register.html")
+
 
 @app.route("/logout")
 @login_required
@@ -125,3 +135,18 @@ def logout():
 @app.route("/explore", methods=["GET", "POST"])
 def explore():
     return render_template("explore.html")
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    # TODO: figure out a way to do categories
+    templ = """
+            {% for deck in decks %}
+            <tr>
+                <td>{{ deck.status }}</td>
+                <td>{{ deck.title }}</td>
+                <td>{{ deck.length }}</td>
+                <td>{{ deck.difficulty }}</td>
+            </tr>
+            {% endfor %}
+    """
