@@ -1,19 +1,35 @@
 {
-	"image": "mcr.microsoft.com/devcontainers/universal:2",
-	"features": {
-		"ghcr.io/devcontainers-contrib/features/prettier:1": {},
-		"ghcr.io/r3dpoint/devcontainer-features/tailwindcss-standalone-cli:1": {},
-		"ghcr.io/devcontainers-contrib/features/black:2": {}
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"esbenp.prettier-vscode",
-				"ms-python.python",
-				"ms-python.black-formatter",
-				"bradlc.vscode-tailwindcss",
-				"wholroyd.jinja"
-			]
-		}
-	}
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/prettier:1": {},
+    "ghcr.io/r3dpoint/devcontainer-features/tailwindcss-standalone-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/black:2": {}
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["templates/index.html"]
+    },
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "bradlc.vscode-tailwindcss",
+        "wholroyd.jinja"
+      ]
+    }
+  },
+  "waitFor": "onCreateCommand",
+  "updateContentCommand": "pip install -r requirements.txt",
+  "postCreateCommand": "",
+  "postAttachCommand": {
+    "server": "flask --debug run"
+  },
+  "portsAttributes": {
+    "5000": {
+      "label": "Application",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [5000]
 }

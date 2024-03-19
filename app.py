@@ -106,3 +106,9 @@ def register():
 def logout():
     session.clear()
     return redirect("/")
+
+
+# TODO:
+@app.route("/explore", methods=["GET", "POST"])
+def explore():
+    return render_template("explore.html")
