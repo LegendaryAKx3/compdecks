@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Flask, render_template, redirect, render_template, request, session
+from flask import Flask, render_template, redirect, render_template, request, session, flash
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_session import Session
 import sqlite3
@@ -12,6 +12,7 @@ Session(app)
 
 def connect_db():
     connection = sqlite3.connect("CD.db")
+    connection.row_factory = sqlite3.Row
     return connection
 
 def login_required(f):
@@ -37,10 +38,15 @@ def login():
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
+        conn = connect_db()
+        db = conn.cursor()
+
         # Check both username and password are submitted
         if (not request.form.get("username")) or (not request.form.get("password")):
+            flash("Improper form submission")
             return render_template(
                 "login.html")
+            
 
         user = db.execute(
             "SELECT * FROM accounts WHERE username = ?", request.form.get("username")
@@ -51,10 +57,12 @@ def login():
         if len(user) != 1 or not check_password_hash(
             user[0]["hash"], request.form.get("password")
         ):
+            flash("Invalid login information")
             return render_template("login.html")
 
         # store account login status until session is cleared
         session["uuid"] = user[0]["id"]
+        conn.close()
         return redirect("/")
 
     else:
@@ -64,6 +72,8 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
+        conn = connect_db()
+        db = conn.cursor()
         # get form info and check validity
 
         username = request.form.get("username")
@@ -71,8 +81,9 @@ def register():
         confirmation = request.form.get("confirmation")
 
         if not username:
+            flash("Username cannot be empty")
             return render_template(
-                "register.html", error="Username field cannot be empty"
+                "register.html"
             )
 
         for entry in db.execute("SELECT username FROM accounts;"):
@@ -98,6 +109,8 @@ def register():
             username,
             generate_password_hash(password),
         )
+        conn.commit()
+        conn.close()
         return redirect("/")
     return render_template("register.html")
 
