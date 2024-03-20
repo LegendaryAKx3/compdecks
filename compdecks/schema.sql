@@ -2,6 +2,7 @@
 -- Drop any existing data and create empty tables.
 
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS decks;
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
