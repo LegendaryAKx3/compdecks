@@ -19,8 +19,6 @@ bp = Blueprint("explore", __name__)
 
 
 class Deck:
-    id = 0
-
     def __init__(self, completed, title, questions, difficulty):
         self.completed = completed
         self.title = title
@@ -33,7 +31,7 @@ class Deck:
         return word.lower() in self.title.lower()
 
 
-users = [
+decks = [
     Deck("C", "My math deck", "10", "2"),
     Deck("N", "Spanish is good", "3", "2"),
     Deck("C", "Scary science", "105", "2"),
@@ -58,15 +56,15 @@ def explore():
 @bp.route("/search/", methods=["POST"])
 def search():
     templ = """
-            {% for user in users %}
+            {% for deck in decks %}
             <tr>
-                <td>{{ user.completed }}</td>
-                <td>{{ user.title }}</td>
-                <td>{{ user.questions }}</td>
-                <td>{{ user.difficulty }}</td>
+                <td>{{ deck.completed }}</td>
+                <td>{{ deck.title }}</td>
+                <td>{{ deck.questions }}</td>
+                <td>{{ deck.difficulty }}</td>
             </tr>
             {% endfor %}
     """
     searchWord = request.form.get("search", None)
-    matchusers = [user for user in users if user.search(searchWord)]
-    return render_template_string(templ, users=matchusers)
+    matchusers = [deck for deck in decks if deck.search(searchWord)]
+    return render_template_string(templ, decks=matchusers)
