@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <script
+      src="https://unpkg.com/htmx.org@1.9.11"
+      integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
+      crossorigin="anonymous"
+    ></script>
+    {% block css %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='output.css') }}"
+    />
+
+    {% endblock %}
+
+    <title>CompDecks | {% block title %}{% endblock %}</title>
+  </head>
+
+  <nav>
+    <ul>
+      {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span></li>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a> {% else %}</li>
+
+      <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+      <li>
+        <a href="{{ url_for('auth.login') }}">Log In</a>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>
+
+  <body>
+    <div class="hero">
+      {% if session["uuid"] %}
+      <form action="/logout" method="get">
+        <button type="submit">Log Out</button>
+      </form>
+      {% endif %}
+    </div>
+    {% for message in get_flashed_messages() %}
+    <!--TODO: style flash class-->
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <div class="body">{% block body %}{% endblock %}</div>
+  </body>
+</html>

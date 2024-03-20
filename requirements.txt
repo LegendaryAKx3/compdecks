@@ -12,3 +12,5 @@ sqlparse==0.4.4
 termcolor==2.3.0
 Werkzeug==2.3.7
 flask-htmx==0.3.2
+pytest==8.1.1
+coverage==7.4.4
