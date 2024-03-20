@@ -1,10 +1,8 @@
 {% extends "layout.html" %} {% block title %}Explore{% endblock %} {% block
 body%}
 <div class="max-w-2xl mx-auto">
+  <span class="htmx-indicator"> <img src="/img/bars.svg" /> Searching... </span>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <span class="htmx-indicator">
-      <img src="/img/bars.svg" /> Searching...
-    </span>
     <div class="p-4">
       <label for="table-search" class="sr-only">Search</label>
       <div class="relative mt-1">
