@@ -114,7 +114,7 @@ def register():
             )
 
         db.execute(
-            "INSERT INTO accounts (username, hash) VALUES(?, ?);",
+            "INSERT INTO users (username, hash) VALUES(?, ?);",
             username,
             generate_password_hash(password),
         )

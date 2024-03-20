@@ -12,7 +12,7 @@ def test_register(client, app):
         assert (
             get_db()
             .execute(
-                "SELECT * FROM user WHERE username = 'a'",
+                "SELECT * FROM users WHERE username = 'a'",
             )
             .fetchone()
             is not None
