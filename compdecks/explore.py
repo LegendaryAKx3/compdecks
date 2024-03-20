@@ -18,37 +18,34 @@ from compdecks.db import get_db
 bp = Blueprint("explore", __name__)
 
 
-class User:
+class Deck:
     id = 0
 
-    def __init__(self, fname, lname, email, extra):
-        User.id += 1
-        self.id = User.id
-        self.fname = fname
-        self.lname = lname
-        self.email = email
-        self.extra = extra
+    def __init__(self, completed, title, questions, difficulty):
+        self.completed = completed
+        self.title = title
+        self.questions = questions
+        self.difficulty = difficulty
 
     def search(self, word):
         if word is None:
             return False
-        all = self.fname + self.lname + self.email + self.extra
-        return word.lower() in all.lower()
+        return word.lower() in self.title.lower()
 
 
 users = [
-    User("C", "My math deck", "10", "2"),
-    User("N", "Spanish is good", "3", "2"),
-    User("C", "Scary science", "105", "2"),
-    User("N", "Awesome anthropology", "204", "2"),
-    User("N", "Cool Chemistry", "14", "2"),
-    User("P", "French", "3", "2"),
-    User("P", "My latin deck", "49", "2"),
-    User("N", "Comp sci", "590", "2"),
-    User("C", "Business", "23", "2"),
-    User("P", "Bio studying", "43", "2"),
-    User("C", "Calc III", "87", "2"),
-    User("N", "Hard economics test", "51", "2"),
+    Deck("C", "My math deck", "10", "2"),
+    Deck("N", "Spanish is good", "3", "2"),
+    Deck("C", "Scary science", "105", "2"),
+    Deck("N", "Awesome anthropology", "204", "2"),
+    Deck("N", "Cool Chemistry", "14", "2"),
+    Deck("P", "French", "3", "2"),
+    Deck("P", "My latin deck", "49", "2"),
+    Deck("N", "Comp sci", "590", "2"),
+    Deck("C", "Business", "23", "2"),
+    Deck("P", "Bio studying", "43", "2"),
+    Deck("C", "Calc III", "87", "2"),
+    Deck("N", "Hard economics test", "51", "2"),
 ]
 
 
@@ -63,11 +60,10 @@ def search():
     templ = """
             {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.fname }}</td>
-                <td>{{ user.lname }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.extra }}</td>
+                <td>{{ user.completed }}</td>
+                <td>{{ user.title }}</td>
+                <td>{{ user.questions }}</td>
+                <td>{{ user.difficulty }}</td>
             </tr>
             {% endfor %}
     """
