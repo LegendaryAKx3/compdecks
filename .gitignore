@@ -177,3 +177,5 @@ build/
 .idea/
 *.swp
 *~
+
+CD.db
