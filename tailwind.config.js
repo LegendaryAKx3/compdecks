@@ -2,7 +2,7 @@ const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./templates/**/*.html"],
+  content: ["./compdecks/templates/**/*.html"],
   // corePlugins: [
   //   "fontSmoothing",
   //   "fontFamily",
