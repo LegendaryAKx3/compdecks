@@ -46,4 +46,8 @@ def create_app(test_config=None):
     app.register_blueprint(content.bp)
     app.add_url_rule("/", endpoint="index")
 
+    from . import explore
+
+    app.register_blueprint(explore.bp)
+
     return app
