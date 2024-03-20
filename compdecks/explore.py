@@ -37,18 +37,18 @@ class User:
 
 
 users = [
-    User("abe", "vida", "abe@nowhere.com", "2"),
-    User("betty", "b", "bb@nowhere.com", "2"),
-    User("joe", "robinson", "jrobinson@nowhere.com", "2"),
-    User("Luis", "Cortes", "Luis@somewhere.com", "2"),
-    User("marty", "hinkle", "mhinkle@nowhere.com", "2"),
-    User("matthew", "robinson", "mrobinson@nowhere.com", "2"),
-    User("collin", "western", "cwest@nowhere.com", "2"),
-    User("marty", "hinkle II", "mhinkle2@nowhere.com", "2"),
-    User("joe", "robinson", "jrobinson@nowhere.com", "2"),
-    User("juan", "vida", "juanvida@nowhere.com", "2"),
-    User("marty", "hinkle III", "mhinkle3@nowhere.com", "2"),
-    User("zoe", "omega", "zoe@nowhere.com", "2"),
+    User("C", "My math deck", "10", "2"),
+    User("N", "Spanish is good", "3", "2"),
+    User("C", "Scary science", "105", "2"),
+    User("N", "Awesome anthropology", "204", "2"),
+    User("N", "Cool Chemistry", "14", "2"),
+    User("P", "French", "3", "2"),
+    User("P", "My latin deck", "49", "2"),
+    User("N", "Comp sci", "590", "2"),
+    User("C", "Business", "23", "2"),
+    User("P", "Bio studying", "43", "2"),
+    User("C", "Calc III", "87", "2"),
+    User("N", "Hard economics test", "51", "2"),
 ]
 
 
