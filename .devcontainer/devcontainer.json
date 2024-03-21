@@ -33,6 +33,7 @@
   },
   "waitFor": "onCreateCommand",
   // TODO: make sure venv is being sourced
+  // TODO: stuff for NPM
   "updateContentCommand": "",
   "postCreateCommand": "pip install -r requirements.txt",
   "postAttachCommand": {
