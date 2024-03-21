@@ -1,51 +1,65 @@
 {% extends "layout.html" %} {% block title %}Explore{% endblock %} {% block
 body%}
 <div class="max-w-2xl mx-auto">
-  <span class="htmx-indicator"> <img src="/img/bars.svg" /> Searching... </span>
   <div class="relative overflow-x-auto sm:rounded-lg">
     <div class="p-4">
-      <label for="table-search" class="sr-only">Search</label>
-      <div class="relative mt-1">
-        <div
-          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-        >
-          <svg
-            class="w-5 h-5 text-gray-500 dark:text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </div>
+      <div class="relative">
+        <label for="Search" class="sr-only"> Search </label>
+
         <input
-          hx-indicator=".htmx-indicator"
           hx-target="#search-results"
           hx-trigger="input changed delay:100ms, search"
           hx-post="/search/"
           name="search"
-          type="search"
+          type="text"
           id="table-search"
-          placeholder="Search for decks"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5"
+          placeholder="Search for..."
+          class="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
         />
-      </div>
 
-      <table class="table w-full text-sm text-left text-gray-500">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-          <tr>
-            <th scope="col" class="px-6 py-3">Status</th>
-            <th scope="col" class="px-6 py-3">Title</th>
-            <th scope="col" class="px-6 py-3">Questions</th>
-            <th scope="col" class="px-6 py-3">Difficulty</th>
-          </tr>
-        </thead>
-        <tbody id="search-results"></tbody>
-      </table>
+        <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
+          <button type="button" class="text-gray-600 hover:text-gray-700">
+            <span class="sr-only">Search</span>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-4 w-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </button>
+        </span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+          <thead class="ltr:text-left rtl:text-right">
+            <tr>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Status
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Title
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Questions
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Difficulty
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="divide-y divide-gray-200" id="search-results"></tbody>
+        </table>
+      </div>
     </div>
   </div>
 
