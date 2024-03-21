@@ -38,30 +38,32 @@ body%}
           </button>
         </span>
       </div>
-      <div class="overflow-x-auto">
-        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-          <thead class="ltr:text-left rtl:text-right">
-            <tr>
-              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Status
-              </th>
-              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Title
-              </th>
-              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Questions
-              </th>
-              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                Difficulty
-              </th>
-            </tr>
-          </thead>
-
-          <tbody class="divide-y divide-gray-200" id="search-results"></tbody>
-        </table>
-      </div>
     </div>
   </div>
 
-  {% endblock body%}
+  <!--removed overflow-x-auto-->
+  <div class="">
+    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+      <thead class="ltr:text-left rtl:text-right">
+        <tr>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+            Status
+          </th>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+            Title
+          </th>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+            Questions
+          </th>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+            Difficulty
+          </th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-200" id="search-results"></tbody>
+    </table>
+  </div>
 </div>
+
+{% endblock body%}
