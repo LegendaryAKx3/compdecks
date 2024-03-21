@@ -1,2 +1,38 @@
-{% extends "layout.html" %} {% block title %}Explore{% endblock %} {% block
-body%} {%endblock body%}
+{% extends "layout.html" %} {% block title %}Explore{% endblock %} {% block body
+%}
+<div>
+  <div class="bg-gray-100 h-screen flex justify-center items-center">
+    <div class="max-w-lg bg-white p-8 rounded shadow-md">
+      <div class="mb-6">
+        <p class="text-lg font-semibold mb-2">
+          Question 1: What is the capital of France?
+        </p>
+        <div class="space-y-2">
+          <label class="flex items-center">
+            <input type="radio" name="question1" value="a" class="mr-2" />
+            <span class="text-gray-700">a. Paris</span>
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="question1" value="b" class="mr-2" />
+            <span class="text-gray-700">b. Rome</span>
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="question1" value="c" class="mr-2" />
+            <span class="text-gray-700">c. Berlin</span>
+          </label>
+          <label class="flex items-center">
+            <input type="radio" name="question1" value="d" class="mr-2" />
+            <span class="text-gray-700">d. Madrid</span>
+          </label>
+        </div>
+      </div>
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+
+{%endblock body%}
