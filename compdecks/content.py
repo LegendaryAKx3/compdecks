@@ -12,3 +12,10 @@ bp = Blueprint("content", __name__)
 def index():
     # db = get_db()
     return render_template("content/index.html", title="Hello")
+
+@bp.route("/create", methods=["GET", "POST"])
+def create_deck():
+    if request.method == "POST":
+        ...
+        # Figure out how csv file editing system will work
+    return render_template("create.html")
