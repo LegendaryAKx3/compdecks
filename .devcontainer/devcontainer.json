@@ -20,6 +20,7 @@
     }
   },
   "waitFor": "onCreateCommand",
+  // TODO: make sure venv is being sourced
   "updateContentCommand": "",
   "postCreateCommand": "pip install -r requirements.txt",
   "postAttachCommand": {
