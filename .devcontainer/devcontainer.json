@@ -26,7 +26,8 @@
         "bradlc.vscode-tailwindcss",
         "wholroyd.jinja",
         "charliermarsh.ruff",
-        "otovo-oss.htmx-tags"
+        "otovo-oss.htmx-tags",
+        "alexcvzz.vscode-sqlite"
       ]
     }
   },
