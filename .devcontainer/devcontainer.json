@@ -24,7 +24,8 @@
         "ms-python.python",
         "ms-python.black-formatter",
         "bradlc.vscode-tailwindcss",
-        "wholroyd.jinja"
+        "wholroyd.jinja",
+        "charliermarsh.ruff"
       ]
     }
   },
