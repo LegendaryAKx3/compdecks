@@ -25,7 +25,8 @@
         "ms-python.black-formatter",
         "bradlc.vscode-tailwindcss",
         "wholroyd.jinja",
-        "charliermarsh.ruff"
+        "charliermarsh.ruff",
+        "otovo-oss.htmx-tags"
       ]
     }
   },
