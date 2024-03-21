@@ -20,10 +20,10 @@
     }
   },
   "waitFor": "onCreateCommand",
-  "updateContentCommand": "source .venv/bin/activate && pip install -r requirements.txt",
+  "updateContentCommand": "source .venv/bin/activate",
   "postCreateCommand": "",
   "postAttachCommand": {
-    "server": "flask --app=compdecks --debug run",
+    "server": "pip install -r requirements.txt && flask --app=compdecks --debug run",
     "css": "tailwindcss -i compdecks/static/main.css -o compdecks/static/output.css --watch"
   },
   "portsAttributes": {
