@@ -7,7 +7,7 @@
   },
   "customizations": {
     "codespaces": {
-      "openFiles": ["templates/index.html"]
+      "openFiles": ["compdecks/templates/layout.html"]
     },
     "vscode": {
       "extensions": [
@@ -21,14 +21,14 @@
   },
   "waitFor": "onCreateCommand",
   "updateContentCommand": "pip install -r requirements.txt",
-  "postCreateCommand": "",
+  "postCreateCommand": "source .venv/bin/activate",
   "postAttachCommand": {
-    "server": "flask --app=compdecks --debug run"
+    "server": "flask --app=compdecks --debug run",
+    "css": "tailwindcss -i compdecks/static/main.css -o compdecks/static/output.css --watch"
   },
   "portsAttributes": {
     "5000": {
-      "label": "Application",
-      "onAutoForward": "openPreview"
+      "label": "Application"
     }
   },
   "forwardPorts": [5000]
