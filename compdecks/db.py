@@ -29,16 +29,17 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-def generate_csv(tuple, filename):
-    """Write tuples to a csv file and save with given filename within the /user_uploads folder
+
+def generate_csv(tup, filename) -> None:
+    """Write tuples to a csv file and save with
+    given filename within the /user_uploads folder
     """
-    file_path = os.path.join("./user_uploads", filename, ".csv")
-    with open(file_path, "w", newline='') as f:
+    file = filename + ".csv"
+    file_path = os.path.join("./user_uploads", file)
+    with open(file_path, "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerows(tuple)
+        writer.writerows(tup)
     return
-
-
 
 
 def init_db():
@@ -47,8 +48,6 @@ def init_db():
 
     with current_app.open_resource("schema.sql") as f:
         db.executescript(f.read().decode("utf8"))
-
-
 
 
 @click.command("init-db")
