@@ -3,7 +3,7 @@
   <h1 class="font-bold text-2xl">Question</h1>
   <p>{{ question[0] }}</p>
   <form class="flex flex-col" action="/quiz" method="post">
-    <input type="text" name="answer" required />
+    <input type="text" name="answer" required autocomplete="off" />
     <button
       type="submit"
       class="px-8 py-3 font-semibold rounded dark:bg-gray-100 dark:text-gray-800"
