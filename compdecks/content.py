@@ -87,7 +87,6 @@ test_quiz = Deck("test_quiz.csv")
 
 @bp.route("/quiz", methods=["GET", "POST"])
 def quiz():
-    print(test_quiz.get_current_question())
     if request.method == "GET":
         return render_template(
             "content/quiz.html", question=test_quiz.get_current_question()
