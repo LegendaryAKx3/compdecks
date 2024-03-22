@@ -95,15 +95,7 @@ def quiz():
         user_answer = request.form["answer"]
         is_correct = test_quiz.check_answer(user_answer)
         test_quiz.update_score(is_correct)
-        try:
-            next_question = test_quiz.next_question()
-        # FIXME: really weird fix/
-        except IndexError:
-            return render_template(
-                "content/result.html",
-                score=test_quiz.score,
-                total=test_quiz.deck_length(),
-            )
+        next_question = test_quiz.next_question()
         if next_question:
             return render_template("content/quiz.html", question=next_question())
         else:
