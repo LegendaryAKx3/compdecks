@@ -42,9 +42,10 @@ class Deck:
         return len(self.deck)
 
     def next_question(self):
-        self.idx += 1
-        if self.idx >= len(self.deck):
+        # TODO: how to fix index error?
+        if self.idx + 1 >= len(self.deck):
             return None
+        self.idx += 1
         return self.get_current_question
 
     # TODO: call this at some point
@@ -95,7 +96,15 @@ def quiz():
         user_answer = request.form["answer"]
         is_correct = test_quiz.check_answer(user_answer)
         test_quiz.update_score(is_correct)
-        next_question = test_quiz.next_question()
+        try:
+            next_question = test_quiz.next_question()
+        # FIXME: really weird fix/
+        except IndexError:
+            return render_template(
+                "content/result.html",
+                score=test_quiz.score,
+                total=test_quiz.deck_length(),
+            )
         if next_question:
             return render_template("content/quiz.html", question=next_question())
         else:
