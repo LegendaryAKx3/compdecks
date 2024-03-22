@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block title %}{{ deck.id }}{% endblock %} {%
+block body%}
+<h2>{{ deck.name }}</h2>
+<p>Owner: {{ deck.owner }}</p>
+<p>File Path: {{ deck.file_path }}</p>
+<h3>Questions</h3>
+<ul>
+  {% for question in deck.questions %}
+  <li>{{ question.text }}</li>
+  {% if question.type == 'input' %}
+  <input type="text" name="input_{{ question.id }}" placeholder="Your answer" />
+  {% elif question.type == 'multiple_choice' %}
+  <ul>
+    {% for choice in question.choices %}
+    <li>
+      <input type="radio" name="mc_{{ question.id }}" value="{{ choice.id }}" />
+      <label>{{ choice.text }}</label>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endfor %}
+</ul>
+<button id="start-quiz">Start Quiz</button>
+<script>
+  document.getElementById("start-quiz").addEventListener("click", function () {
+    // Logic to start the quiz
+    // You can use HTMX to handle the quiz start action
+  });
+</script>
+{%endblock%}

@@ -57,11 +57,11 @@ def explore():
 def search():
     templ = """
             {% for deck in decks %}
-            <tr class="bg-white border-b hover:bg-gray-50">
-                <td class="px-6 py-4">{{ deck.completed }}</td>
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ deck.title }}</th>
-                <td class="px-6 py-4">{{ deck.questions }}</td>
-                <td class="px-6 py-4">{{ deck.difficulty }}</td>
+            <tr class="odd:bg-gray-50">
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ deck.completed }}</td>
+                <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ deck.title }}</th>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ deck.questions }}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ deck.difficulty }}</td>
             </tr>
             {% endfor %}
     """
