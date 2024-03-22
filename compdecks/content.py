@@ -3,9 +3,47 @@ from werkzeug.exceptions import abort
 
 from compdecks.auth import login_required
 from compdecks.db import get_db
+import csv
+import random
 
 # content does not have a url_prefix
 bp = Blueprint("content", __name__)
+
+
+class Deck:
+    def __init__(self, deck_file):
+        self.deck = self.load(deck_file)
+        self.idx = 0
+
+    def load(self, deck_file):
+        deck = []
+        with open(deck_file, "r", newline="") as file:
+            reader = csv.reader(file)
+            for row in reader:
+                question, answer = row
+                deck.append((question, answer))
+
+        return self.shuffle(deck)
+
+    def get_current_question(self):
+        return self.deck[self.idx]
+
+    def check_answer(self, user_answer):
+        _, correct_answer = self.get_current_question()
+        # This may bite me later for subjects like chemistry...
+        return user_answer.strip().lower() == correct_answer.lower()
+
+    def next_question(self):
+        self.idx += 1
+        if self.idx >= len(self.deck):
+            return None
+        return self.get_current_question
+
+    # TODO: call this at some point
+    def shuffle(self):
+        new_deck = self.deck
+        random.shuffle(new_deck)
+        return new_deck
 
 
 @bp.route("/")
@@ -20,15 +58,6 @@ def create_deck():
         ...
         # Figure out how csv file editing system will work
     return render_template("create.html")
-
-
-class Deck:
-    def __init__(self):
-        self.id = 1
-        self.name = "Good Deck"
-        self.owner = "Me 1"
-        self.questions = "10"
-        self.file_path = "/d//d/"
 
 
 @bp.route("/deck/<int:deck_id>", methods=["GET"])
