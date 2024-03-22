@@ -14,6 +14,7 @@ class Deck:
     def __init__(self, deck_file):
         self.deck = self.load(deck_file)
         self.idx = 0
+        self.score = 0
 
     def load(self, deck_file):
         deck = []
@@ -33,6 +34,13 @@ class Deck:
         # This may bite me later for subjects like chemistry...
         return user_answer.strip().lower() == correct_answer.lower()
 
+    def update_score(self, is_correct: bool) -> None:
+        if is_correct:
+            self.score += 1
+
+    def deck_length(self):
+        return len(self.deck)
+
     def next_question(self):
         self.idx += 1
         if self.idx >= len(self.deck):
@@ -40,10 +48,9 @@ class Deck:
         return self.get_current_question
 
     # TODO: call this at some point
-    def shuffle(self):
-        new_deck = self.deck
-        random.shuffle(new_deck)
-        return new_deck
+    def shuffle(self, deck):
+        random.shuffle(deck)
+        return deck
 
 
 @bp.route("/")
@@ -71,3 +78,29 @@ def deck_details(deck_id):
     # TODO: REMOVE, THIS IS FOR TESTING PURPOSES
     deck = Deck()
     return render_template("content/deck_details.html", deck=deck)
+
+
+# THIS URL IS FOR TESTING. REMOVE LATER TODO:
+test_quiz = Deck("test_quiz.csv")
+
+
+@bp.route("/quiz", methods=["GET", "POST"])
+def quiz():
+    print(test_quiz.get_current_question())
+    if request.method == "GET":
+        return render_template(
+            "content/quiz.html", question=test_quiz.get_current_question()
+        )
+    elif request.method == "POST":
+        user_answer = request.form["answer"]
+        is_correct = test_quiz.check_answer(user_answer)
+        test_quiz.update_score(is_correct)
+        next_question = test_quiz.next_question()
+        if next_question:
+            return render_template("content/quiz.html", question=next_question())
+        else:
+            return render_template(
+                "content/result.html",
+                score=test_quiz.score,
+                total=test_quiz.deck_length(),
+            )
