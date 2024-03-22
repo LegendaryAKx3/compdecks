@@ -1,8 +1,8 @@
 {% extends "layout.html" %} {% block body%}
-<div class="flex flex-col">
+<div class="flex flex-col items-center min-h-screen w-full gap-4">
   <h1 class="font-bold text-2xl">Question</h1>
   <p>{{ question[0] }}</p>
-  <form action="/quiz" method="post">
+  <form class="flex flex-col" action="/quiz" method="post">
     <input type="text" name="answer" required />
     <button
       type="submit"
