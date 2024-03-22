@@ -17,3 +17,11 @@ CREATE TABLE decks (
     name TEXT NOT NULL,
     file_path TEXT NOT NULL
 );
+
+-- Keep track of all user leaderboard positions
+CREATE TABLE leaderboards (
+    deck_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    username TEXT NOT NULL,
+    position INTEGER NOT NULL
+)
