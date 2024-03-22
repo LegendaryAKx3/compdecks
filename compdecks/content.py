@@ -87,6 +87,7 @@ test_quiz = Deck("test_quiz.csv")
 
 @bp.route("/quiz", methods=["GET", "POST"])
 def quiz():
+    global test_quiz
     if request.method == "GET":
         return render_template(
             "content/quiz.html", question=test_quiz.get_current_question()
@@ -99,8 +100,12 @@ def quiz():
         if next_question:
             return render_template("content/quiz.html", question=next_question())
         else:
+            # TODO: fix, this is to stop the form resubmitting when reloading on the result screen
+            score = test_quiz.score
+            total = test_quiz.deck_length()
+            test_quiz = Deck("test_quiz.csv")
             return render_template(
                 "content/result.html",
-                score=test_quiz.score,
-                total=test_quiz.deck_length(),
+                score=score,
+                total=total,
             )
