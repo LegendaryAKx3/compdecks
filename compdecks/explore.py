@@ -13,9 +13,10 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from compdecks.db import get_db
+from compdecks.db import get_db, close_db
 
 bp = Blueprint("explore", __name__)
+
 
 
 class Deck:
@@ -55,6 +56,12 @@ def explore():
 
 @bp.route("/search/", methods=["POST"])
 def search():
+
+    searchWord = request.form.get("search", None)
+    db = get_db()
+    matchDecks = db.execute("SELECT * FROM decks WHERE name LIKE '%?%'", searchWord)
+    close_db()
+
     templ = """
             {% for deck in decks %}
             <tr class="odd:bg-gray-50">
@@ -73,6 +80,7 @@ def search():
             </tr>
             {% endfor %}
     """
-    searchWord = request.form.get("search", None)
-    matchusers = [deck for deck in decks if deck.search(searchWord)]
-    return render_template_string(templ, decks=matchusers)
+
+    
+    # matchusers = [deck for deck in decks if deck.search(searchWord)]
+    return render_template_string(templ, decks=matchDecks)
