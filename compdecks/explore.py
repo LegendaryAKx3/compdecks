@@ -62,6 +62,14 @@ def search():
                 <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ deck.title }}</th>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ deck.questions }}</td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ deck.difficulty }}</td>
+                <td class="whitespace-nowrap px-4 py-2">
+                    <a
+                        href="/quiz"
+                        class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                    >
+                        Play
+                    </a>
+                </td>
             </tr>
             {% endfor %}
     """
