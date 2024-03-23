@@ -62,7 +62,7 @@ def index():
 
 @bp.route("/create", methods=["GET", "POST"])
 def create_deck():
-    if request.method == "POST":
+    if request.method == "GET":
         ...
         # Figure out how csv file editing system will work
     return render_template("content/create.html")
