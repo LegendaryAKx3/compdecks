@@ -33,37 +33,34 @@ body%}
 
 <!--Featured-->
 <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-  <div class="sm:flex sm:items-center sm:justify-between">
+  <div class="mb-4 sm:flex sm:items-center sm:justify-between">
     <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">Featured</h1>
   </div>
-  <div
-    class="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s]"
-  >
-    <div class="rounded-[10px] bg-white p-4 !pt-20 sm:p-6">
-      <time datetime="2022-10-10" class="block text-xs text-gray-500">
-        10th Oct 2022
-      </time>
-
-      <a href="#">
-        <h3 class="mt-0.5 text-lg font-medium text-gray-900">
-          How to center an element using JavaScript and jQuery
-        </h3>
-      </a>
-
-      <div class="mt-4 flex flex-wrap gap-1">
-        <span
-          class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-xs text-purple-600"
-        >
-          Snippet
-        </span>
-
-        <span
-          class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-xs text-purple-600"
-        >
-          JavaScript
-        </span>
+  <div class="flex space-x-4">
+    <div class="w-[250px] rounded-xl border border-none bg-[url(https://assets.leetcode.com/explore/cards/system-design-for-interviews-and-beyond/img-1676672273.png)] bg-contain text-white shadow-2xl">
+      <div>
+        <div class="pl-6 pr-6 pt-6">
+          <div class="text-xs uppercase">LeetCode's Interview Course</div>
+          <div class="mt-1 text-lg font-bold">Data Structures and Algorithms</div>
+        </div>
+        <div class="mt-10 flex justify-between rounded-b-xl bg-white pb-3 pl-4 pr-4 pt-4 shadow-2xl">
+          <div class="flex flex-col items-center">
+            <div class="text-3xl font-semibold text-black">4</div>
+            <div class="text-xs font-semibold text-gray-500">Chapters</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-3xl font-semibold text-black">17</div>
+            <div class="text-xs font-semibold text-gray-500">Items</div>
+          </div>
+          <div>
+            <!-- <div class="relative overflow-hidden rounded-full bg-gray-200 px-8 pt-16 text-center"></div> -->
+            <div class="pb-6"></div>
+            <div class="pr-3 text-lg font-normal text-gray-400">0%</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 {%endblock body%}
