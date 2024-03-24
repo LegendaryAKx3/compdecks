@@ -57,9 +57,26 @@ def init_db_command():
     click.echo("Initialized the database.")
 
 
+@click.command("init-data")
+def init_data_command():
+    """Insert test data into the decks table."""
+    db = get_db()
+    decks_data = [
+        (1, "Math Quiz", "user_uploads/math.csv"),
+        (2, "History Trivia", "user_uploads/history.csv"),
+        (1, "Science Flashcards", "user_uploads/science.csv"),
+    ]
+    db.executemany(
+        "INSERT INTO decks (owner_id, name, file_path) VALUES (?, ?, ?)", decks_data
+    )
+    db.commit()
+    click.echo("Inserted test data into the decks table.")
+
+
 def init_app(app):
     """Register database functions with the Flask app. This is called by
     the application factory.
     """
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+    app.cli.add_command(init_data_command)
