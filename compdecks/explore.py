@@ -18,7 +18,6 @@ from compdecks.db import get_db, close_db
 bp = Blueprint("explore", __name__)
 
 
-
 class Deck:
     def __init__(self, completed, title, questions, difficulty):
         self.completed = completed
@@ -59,8 +58,9 @@ def search():
 
     searchWord = request.form.get("search", None)
     db = get_db()
-    matchDecks = db.execute("SELECT * FROM decks WHERE name LIKE '%?%'", searchWord)
-    close_db()
+    matchDecks = db.execute(
+        "SELECT * FROM decks WHERE name LIKE ?", ("%" + searchWord + "%",)
+    )
 
     templ = """
             {% for deck in decks %}
@@ -81,6 +81,5 @@ def search():
             {% endfor %}
     """
 
-    
     # matchusers = [deck for deck in decks if deck.search(searchWord)]
     return render_template_string(templ, decks=matchDecks)
