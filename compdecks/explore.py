@@ -53,32 +53,34 @@ def explore():
     return render_template("explore/explore.html")
 
 
-@bp.route("/search/", methods=["POST"])
+@bp.route("/search/", methods=["GET", "POST"])
 def search():
-    templ = """
-            {% for deck in decks %}
-            <tr class="odd:bg-gray-50">
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ deck.completed }}</td>
-                <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ deck.name }}</th>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ deck.questions }}</td>
-                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ deck.difficulty }}</td>
-                <td class="whitespace-nowrap px-4 py-2">
-                    <a
-                        href="/quiz"
-                        class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                    >
-                        Play
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-    """
+    if request.method == "POST":
+        templ = """
+                {% for deck in decks %}
+                <tr>
+                    <td>{{ deck.completed }}</td>
+                    <th>{{ deck.name }}</td>
+                    <td>{{ deck.questions }}</td>
+                    <td>{{ deck.difficulty }}</td>
+                    <th>
+                        <a
+                            href="/quiz"
+                            class="btn btn-outline btn-primary"
+                        >
+                            Play
+                        </a>
+                    </th>
+                </tr>
+                {% endfor %}
+        """
 
-    searchWord = request.form.get("search", None)
-    db = get_db()
-    matchDecks = db.execute(
-        "SELECT * FROM decks WHERE name LIKE ?", ("%" + searchWord + "%",)
-    ).fetchall()
+        searchWord = request.form.get("search", None)
 
-    # matchusers = [deck for deck in decks if deck.search(searchWord)]
-    return render_template_string(templ, decks=matchDecks)
+        db = get_db()
+        matchDecks = db.execute(
+            "SELECT * FROM decks WHERE name LIKE ?", ("%" + searchWord + "%",)
+        ).fetchall()
+
+        return render_template_string(templ, decks=matchDecks)
+    return render_template("explore/explore.html")

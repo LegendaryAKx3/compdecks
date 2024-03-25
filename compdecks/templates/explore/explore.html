@@ -14,7 +14,7 @@ body%}
           type="text"
           id="table-search"
           placeholder="Search for..."
-          class="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
+          class="input input-bordered w-full"
           autocomplete="off"
         />
 
@@ -42,27 +42,17 @@ body%}
     </div>
   </div>
 
-  <!--removed overflow-x-auto-->
-  <div class="">
-    <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+  <div class="overflow-x-auto">
+    <table class="table table-zebra">
       <thead class="ltr:text-left rtl:text-right">
         <tr>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Status
-          </th>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Title
-          </th>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Questions
-          </th>
-          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-            Difficulty
-          </th>
+          <th>Status</th>
+          <th>Title</th>
+          <th>Questions</th>
+          <th>Difficulty</th>
         </tr>
       </thead>
-
-      <tbody class="divide-y divide-gray-200" id="search-results"></tbody>
+      <tbody id="search-results"></tbody>
     </table>
   </div>
 </div>
