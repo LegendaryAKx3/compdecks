@@ -8,7 +8,7 @@ body%}
 
         <input
           hx-target="#search-results"
-          hx-trigger="input changed delay:100ms, search"
+          hx-trigger="input changed delay:0ms, search"
           hx-post="/search/"
           name="search"
           type="text"
@@ -44,7 +44,7 @@ body%}
 
   <div class="overflow-x-auto">
     <table class="table table-zebra">
-      <thead class="ltr:text-left rtl:text-right">
+      <thead>
         <tr>
           <th>Status</th>
           <th>Title</th>
