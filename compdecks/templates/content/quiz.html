@@ -2,14 +2,15 @@
 <div class="flex flex-col items-center min-h-screen w-full gap-4">
   <h1 class="font-bold text-2xl">Question</h1>
   <p>{{ question[0] }}</p>
-  <form class="flex flex-col" action="/quiz" method="post">
-    <input type="text" name="answer" required autocomplete="off" />
-    <button
-      type="submit"
-      class="px-8 py-3 font-semibold rounded dark:bg-gray-100 dark:text-gray-800"
-    >
-      Next
-    </button>
+  <form class="flex flex-col gap-4" action="/quiz" method="post">
+    <input
+      class="input input-bordered input-primary w-full max-w-xs"
+      type="text"
+      name="answer"
+      required
+      autocomplete="off"
+    />
+    <button type="submit" class="btn btn-primary">Next</button>
   </form>
   {% if message %}
   <p>{{ message }}</p>
