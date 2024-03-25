@@ -1,6 +1,27 @@
-{% extends "layout.html" %} {% block title %}Create{% endblock %} 
-{% block body%} 
-<h1>hello!</h1>
+{% extends "layout.html" %} {% block title %}Create{% endblock %} {% block
+body%}
+<div class="flex justify-center items-center h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-md w-80">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Create a Quiz</h1>
+    <form action="/create" method="post" class="space-y-4">
+      <div>
+        <label for="quizName" class="block text-gray-700">Quiz Name</label>
+        <input
+          type="text"
+          id="quizName"
+          name="quizName"
+          class="form-input mt-1 block w-full"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        class="bg-blue-500 text-white px-4 py-2 rounded-md w-full hover:bg-blue-600 transition duration-300"
+      >
+        Create
+      </button>
+    </form>
+  </div>
+</div>
 
 {%endblock%}
-    

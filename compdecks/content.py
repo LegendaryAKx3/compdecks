@@ -55,6 +55,7 @@ class Deck:
 
 
 @bp.route("/")
+@login_required
 def index():
     # db = get_db()
     return render_template("content/index.html", title="Hello")
@@ -65,6 +66,8 @@ def create_deck():
     if request.method == "GET":
         ...
         # Figure out how csv file editing system will work
+    elif request.method == "POST":
+        ...
     return render_template("content/create.html")
 
 
