@@ -1,8 +1,6 @@
-from flask import Blueprint, flash, g, redirect, render_template, request, url_for
-from werkzeug.exceptions import abort
+from flask import Blueprint, render_template, request
 
 from compdecks.auth import login_required
-from compdecks.db import get_db
 import csv
 import random
 

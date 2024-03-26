@@ -1,19 +1,11 @@
-import functools
-
 from flask import (
     Blueprint,
-    flash,
-    g,
-    redirect,
     render_template,
     request,
-    session,
-    url_for,
     render_template_string,
 )
-from werkzeug.security import check_password_hash, generate_password_hash
 
-from compdecks.db import get_db, close_db
+from compdecks.db import get_db
 
 bp = Blueprint("explore", __name__)
 

@@ -24,7 +24,7 @@ def create_app(test_config=None):
     try:
         os.makedirs(app.instance_path)
     except OSError:
-        pass
+        print("Unable to ensure the instance folder exists")
 
     # a simple page that says hello
     @app.route("/hello")
