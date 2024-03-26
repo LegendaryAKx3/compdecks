@@ -111,3 +111,10 @@ def quiz():
                 score=score,
                 total=total,
             )
+
+
+@bp.route("/settings", methods=["GET", "POST"])
+def settings():
+    theme = request.form["theme"]
+    print(theme)
+    return render_template("content/settings.html")
