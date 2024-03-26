@@ -90,7 +90,7 @@ def deck_play(deck_id: int):
     deck = Deck(path)
     if request.method == "GET":
         return render_template(
-            "content/quiz.html", question=deck.get_current_question()
+            "content/quiz.html", question=deck.get_current_question(), id=deck_id
         )
     elif request.method == "POST":
         user_answer = request.form["answer"]
@@ -99,7 +99,7 @@ def deck_play(deck_id: int):
         next_question = deck.next_question()
         if next_question:
             return render_template(
-                "content/quiz.html", question=next_question(), deck=deck
+                "content/quiz.html", question=next_question(), deck=deck, id=deck_id
             )
         else:
             # TODO: fix, this is to stop the form resubmitting when reloading on the result screen
