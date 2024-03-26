@@ -23,7 +23,12 @@
   <div class="navbar bg-base-100">
     <div class="navbar-start">
       <div class="dropdown">
-        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+        <div
+          tabindex="0"
+          role="button"
+          aria-label="dropdown"
+          class="btn btn-ghost btn-circle"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -54,7 +59,11 @@
     </div>
     <div class="navbar-end">
       <form action="/search/" method="get">
-        <button class="btn btn-ghost btn-circle" type="submit">
+        <button
+          class="btn btn-ghost btn-circle"
+          aria-label="search"
+          type="submit"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -92,7 +101,7 @@
     <div class="hero">
       {% if session["uuid"] %}
       <form action="/logout" method="get">
-        <button type="submit">Log Out</button>
+        <button aria-lable="logout" type="submit">Log Out</button>
       </form>
       {% endif %}
     </div>
