@@ -31,6 +31,7 @@ class Deck:
     def check_answer(self, user_answer):
         _, correct_answer = self.get_current_question()
         # This may bite me later for subjects like chemistry...
+        self.deck.pop(self.idx)
         return user_answer.strip().lower() == correct_answer.lower()
 
     def update_score(self, is_correct: bool) -> None:
