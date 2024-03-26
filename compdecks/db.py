@@ -62,12 +62,13 @@ def init_data_command():
     """Insert test data into the decks table."""
     db = get_db()
     decks_data = [
-        (1, "Math Quiz", "user_uploads/math.csv"),
-        (2, "History Trivia", "user_uploads/history.csv"),
-        (1, "Science Flashcards", "user_uploads/science.csv"),
+        (1, "Math Quiz", "user_uploads/math.csv", 4),
+        (2, "History Trivia", "user_uploads/history.csv", 4),
+        (1, "Science Flashcards", "user_uploads/science.csv", 4),
     ]
     db.executemany(
-        "INSERT INTO decks (owner_id, name, file_path) VALUES (?, ?, ?)", decks_data
+        "INSERT INTO decks (owner_id, name, file_path, length) VALUES (?, ?, ?, ?)",
+        decks_data,
     )
     db.commit()
     click.echo("Inserted test data into the decks table.")

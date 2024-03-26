@@ -17,7 +17,7 @@ CREATE TABLE decks (
     owner_id INTEGER NOT NULL,
     name TEXT NOT NULL,
     file_path TEXT NOT NULL,
-    questions INTEGER NOT NULL
+    length INTEGER NOT NULL
 );
 
 

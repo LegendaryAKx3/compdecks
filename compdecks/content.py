@@ -73,10 +73,9 @@ def create_deck():
 @bp.route("/deck/<int:deck_id>", methods=["GET"])
 def deck_details(deck_id: int):
     db = get_db()
+    print(deck_id)
     # get deck details from the database
-    deck = db.execute(
-        "SELECT * FROM decks WHERE id IS ?", ("%" + str(deck_id) + "%",)
-    ).fetchone()
+    deck = db.execute("SELECT * FROM decks WHERE id IS ?", (str(deck_id),)).fetchone()
 
     # get questions from the deck
     print(deck)
