@@ -16,14 +16,10 @@ CREATE TABLE decks (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     owner_id INTEGER NOT NULL,
     name TEXT NOT NULL,
-    file_path TEXT NOT 
-    questions INTEGER NOT NULL,
+    file_path TEXT NOT NULL,
+    questions INTEGER NOT NULL
 );
 
-CREATE TABLE settings (
-    id INTEGER NOT NULL,
-    colorscheme TEXT NOT NULL,
-);
 
 -- Keep track of all user leaderboard positions
 CREATE TABLE leaderboards (
@@ -31,4 +27,4 @@ CREATE TABLE leaderboards (
     user_id INTEGER NOT NULL,
     username TEXT NOT NULL,
     position INTEGER NOT NULL
-)
+);

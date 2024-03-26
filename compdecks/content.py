@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 
 from compdecks.auth import login_required
+from compdecks.db import get_db
 import csv
 import random
 
@@ -70,15 +71,16 @@ def create_deck():
 
 
 @bp.route("/deck/<int:deck_id>", methods=["GET"])
-def deck_details(deck_id):
+def deck_details(deck_id: int):
+    db = get_db()
     # get deck details from the database
-    ...
+    deck = db.execute(
+        "SELECT * FROM decks WHERE id IS ?", ("%" + str(deck_id) + "%",)
+    ).fetchone()
 
     # get questions from the deck
-    ...
+    print(deck)
 
-    # TODO: REMOVE, THIS IS FOR TESTING PURPOSES
-    deck = Deck("compdecks/user_uploads/math.csv")
     return render_template("content/deck_details.html", deck=deck)
 
 
