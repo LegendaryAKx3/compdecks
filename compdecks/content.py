@@ -77,19 +77,41 @@ def deck_details(deck_id: int):
     return render_template("content/deck_details.html", deck=deck)
 
 
-# THIS URL IS FOR TESTING. REMOVE LATER TODO:
-test_quiz = Deck("test_quiz.csv")
-
-
+# does this need a seperate route getting the same info or can we somehow chain off the deck details?
 @bp.route("/deck/play/<int:deck_id>", methods=["GET", "POST"])
 def deck_play(deck_id: int):
     db = get_db()
-    ...  # TODO:
+    path = db.execute(
+        "SELECT file_path FROM decks WHERE id IS ?", (str(deck_id),)
+    ).fetchone()
+
+    (path,) = path
+    deck = Deck(path)
+    if request.method == "GET":
+        return render_template(
+            "content/quiz.html", question=deck.get_current_question()
+        )
+    elif request.method == "POST":
+        user_answer = request.form["answer"]
+        is_correct = deck.check_answer(user_answer)
+        deck.update_score(is_correct)
+        next_question = deck.next_question()
+        if next_question:
+            return render_template("content/quiz.html", question=next_question())
+        else:
+            # TODO: fix, this is to stop the form resubmitting when reloading on the result screen
+            score = deck.score
+            total = deck.deck_length()
+            return render_template(
+                "content/result.html",
+                score=score,
+                total=total,
+            )
 
 
 @bp.route("/quiz", methods=["GET", "POST"])
 def quiz():
-    global test_quiz
+    test_quiz = Deck("test_quiz.csv")
     if request.method == "GET":
         return render_template(
             "content/quiz.html", question=test_quiz.get_current_question()
