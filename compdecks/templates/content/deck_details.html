@@ -4,15 +4,6 @@ block body%}
   <h2>{{ deck.name }}</h2>
   <p>Owner: {{ deck.owner }}</p>
   <h3>Questions: {{ deck.length }}</h3>
-  <form class="flex flex-col" action="/quiz" method="get">
-    <input type="text" name="answer" required autocomplete="off" />
-    <button
-      type="submit"
-      class="px-8 py-3 font-semibold rounded dark:bg-gray-100 dark:text-gray-800"
-    >
-      Start
-    </button>
-  </form>
 </div>
 
 {%endblock%}

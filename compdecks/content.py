@@ -80,7 +80,7 @@ def deck_details(deck_id):
     ...
 
     # TODO: REMOVE, THIS IS FOR TESTING PURPOSES
-    deck = Deck()
+    deck = Deck("compdecks/user_uploads/math.csv")
     return render_template("content/deck_details.html", deck=deck)
 
 
