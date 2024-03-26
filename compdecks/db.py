@@ -62,9 +62,21 @@ def init_data_command():
     """Insert test data into the decks table."""
     db = get_db()
     decks_data = [
-        (1, "Math Quiz", "A Math Deck", "user_uploads/math.csv", 4),
-        (2, "History Trivia", "A History Deck", "user_uploads/history.csv", 4),
-        (1, "Science Flashcards", "A Science Deck", "user_uploads/science.csv", 4),
+        (1, "Math Quiz", "A Math Deck", "compdecks/user_uploads/math.csv", 4),
+        (
+            2,
+            "History Trivia",
+            "A History Deck",
+            "compdecks/user_uploads/history.csv",
+            4,
+        ),
+        (
+            1,
+            "Science Flashcards",
+            "A Science Deck",
+            "compdecks/user_uploads/science.csv",
+            4,
+        ),
     ]
     db.executemany(
         "INSERT INTO decks (owner_id, name, description, file_path, length) VALUES (?, ?, ?, ?, ?)",

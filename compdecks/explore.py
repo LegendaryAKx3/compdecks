@@ -59,4 +59,5 @@ def search():
         ).fetchall()
 
         return render_template_string(templ, decks=matchDecks)
+    # TODO: send all decks if its a GET
     return render_template("explore/explore.html")
