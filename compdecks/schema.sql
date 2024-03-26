@@ -3,6 +3,7 @@
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS decks;
+DROP TABLE IF EXISTS settings;
 DROP TABLE IF EXISTS leaderboards;
 
 CREATE TABLE users (
@@ -11,12 +12,17 @@ CREATE TABLE users (
     password TEXT NOT NULL
 );
 
--- TODO store questions and answers for the deck in database
 CREATE TABLE decks (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     owner_id INTEGER NOT NULL,
     name TEXT NOT NULL,
-    file_path TEXT NOT NULL
+    file_path TEXT NOT 
+    questions INTEGER NOT NULL,
+);
+
+CREATE TABLE settings (
+    id INTEGER NOT NULL,
+    colorscheme TEXT NOT NULL,
 );
 
 -- Keep track of all user leaderboard positions
