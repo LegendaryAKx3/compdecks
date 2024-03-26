@@ -64,8 +64,8 @@ def register():
             error = "Password is required."
         elif not confirmation or confirmation != password:
             error = "Entered passwords should match"
-        elif len(password) < 8 and password.isalnum():
-            error = "Your password should be at least 8 characters long and contain a special character"
+        elif len(password) < 4:
+            error = "Your password should be at least 4 characters long"
 
         if error is None:
             try:
@@ -100,9 +100,9 @@ def login():
         ).fetchone()
 
         if user is None:
-            error = "Incorrect username."
+            error = "Incorrect username or password."
         elif not check_password_hash(user["password"], password):
-            error = "Incorrect password."
+            error = "Incorrect username or password."
 
         if error is None:
             # store the user id in a new session and return to the index

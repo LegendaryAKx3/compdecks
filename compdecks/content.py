@@ -80,6 +80,7 @@ def deck_details(deck_id: int):
 # does this need a seperate route getting the same info or can we somehow chain off the deck details?
 @bp.route("/deck/play/<int:deck_id>", methods=["GET", "POST"])
 def deck_play(deck_id: int):
+    # TODO: VERY NOT DONE
     db = get_db()
     path = db.execute(
         "SELECT file_path FROM decks WHERE id IS ?", (str(deck_id),)
