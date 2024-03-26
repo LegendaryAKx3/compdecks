@@ -98,37 +98,13 @@ def deck_play(deck_id: int):
         deck.update_score(is_correct)
         next_question = deck.next_question()
         if next_question:
-            return render_template("content/quiz.html", question=next_question())
+            return render_template(
+                "content/quiz.html", question=next_question(), deck=deck
+            )
         else:
             # TODO: fix, this is to stop the form resubmitting when reloading on the result screen
             score = deck.score
             total = deck.deck_length()
-            return render_template(
-                "content/result.html",
-                score=score,
-                total=total,
-            )
-
-
-@bp.route("/quiz", methods=["GET", "POST"])
-def quiz():
-    test_quiz = Deck("test_quiz.csv")
-    if request.method == "GET":
-        return render_template(
-            "content/quiz.html", question=test_quiz.get_current_question()
-        )
-    elif request.method == "POST":
-        user_answer = request.form["answer"]
-        is_correct = test_quiz.check_answer(user_answer)
-        test_quiz.update_score(is_correct)
-        next_question = test_quiz.next_question()
-        if next_question:
-            return render_template("content/quiz.html", question=next_question())
-        else:
-            # TODO: fix, this is to stop the form resubmitting when reloading on the result screen
-            score = test_quiz.score
-            total = test_quiz.deck_length()
-            test_quiz = Deck("test_quiz.csv")
             return render_template(
                 "content/result.html",
                 score=score,
