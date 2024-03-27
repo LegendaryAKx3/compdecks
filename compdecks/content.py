@@ -46,7 +46,7 @@ def create_deck():
 def deck_details(deck_id: int):
     db = get_db()
     deck = db.execute("SELECT * FROM decks WHERE id IS ?", (str(deck_id),)).fetchone()
-    leaderboard = db.execute("select * from leaderboards where deck_id is ? order by score limit 3", (str(deck_id),))                         
+    leaderboard = db.execute("select * from leaderboards where deck_id is ? order by score desc limit 3", (str(deck_id),))                      
     return render_template("content/deck_details.html", deck=deck, leaderboard=leaderboard)
 
 
