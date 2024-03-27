@@ -50,4 +50,7 @@ def create_app(test_config=None):
 
     app.register_blueprint(explore.bp)
 
+    # TODO: remove temp "secret" key
+    app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
     return app
