@@ -61,6 +61,13 @@ def init_db_command():
 def init_data_command():
     """Insert test data into the decks table."""
     db = get_db()
+    users_data = [
+        (1, "Bob", 10),
+        (1, "Jack", 8),
+        (1, "Terry", 9),
+        (2, "Steven", 10),
+        (2, "Chris", 5),
+    ]
     decks_data = [
         (1, "Math Quiz", "A Math Deck", "compdecks/user_uploads/math.csv", 4),
         (
@@ -81,6 +88,10 @@ def init_data_command():
     db.executemany(
         "INSERT INTO decks (owner_id, name, description, file_path, length) VALUES (?, ?, ?, ?, ?)",
         decks_data,
+    )
+    db.executemany(
+        "INSERT INTO leaderboards (deck_id, username, score) VALUES (?, ?, ?)",
+        users_data,
     )
     db.commit()
     click.echo("Inserted test data into the decks table.")
