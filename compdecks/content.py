@@ -46,7 +46,8 @@ def create_deck():
 def deck_details(deck_id: int):
     db = get_db()
     deck = db.execute("SELECT * FROM decks WHERE id IS ?", (str(deck_id),)).fetchone()
-    return render_template("content/deck_details.html", deck=deck)
+    leaderboard = db.execute("select * from leaderboards where deck_id is ? order by score limit 3", (str(deck_id),))                         
+    return render_template("content/deck_details.html", deck=deck, leaderboard=leaderboard)
 
 
 # does this need a seperate route getting the same info or can we somehow chain off the deck details?

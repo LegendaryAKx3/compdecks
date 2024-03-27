@@ -25,7 +25,6 @@ CREATE TABLE decks (
 -- Keep track of all user leaderboard positions
 CREATE TABLE leaderboards (
     deck_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
     username TEXT NOT NULL,
-    position INTEGER NOT NULL
+    score INTEGER NOT NULL
 );
