@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session
 
 from compdecks.auth import login_required
 from compdecks.db import get_db
@@ -10,48 +10,19 @@ bp = Blueprint("content", __name__)
 
 
 class Deck:
-    def __init__(self, deck_file):
-        self.deck = self.load(deck_file)
-        self.idx = 0
-        self.score = 0
+    def __init__(self, path: str):
+        self.questions: list[tuple] = []
+        self.load(path)
 
-    def load(self, deck_file):
-        deck = []
-        with open(deck_file, "r", newline="") as file:
+    def load(self, path: str) -> None:
+        with open(path, "r", newline="") as file:
             reader = csv.reader(file)
             for row in reader:
-                question, answer = row
-                deck.append((question, answer))
-
-        return self.shuffle(deck)
-
-    def get_current_question(self):
-        return self.deck[self.idx]
-
-    def check_answer(self, user_answer):
-        _, correct_answer = self.get_current_question()
-        # This may bite me later for subjects like chemistry...
-        self.deck.pop(self.idx)
-        return user_answer.strip().lower() == correct_answer.lower()
-
-    def update_score(self, is_correct: bool) -> None:
-        if is_correct:
-            self.score += 1
-
-    def deck_length(self):
-        return len(self.deck)
-
-    def next_question(self):
-        # TODO: how to fix index error?
-        if self.idx + 1 >= len(self.deck):
-            return None
-        self.idx += 1
-        return self.get_current_question
-
-    # TODO: call this at some point
-    def shuffle(self, deck):
-        random.shuffle(deck)
-        return deck
+                if len(row) == 2:
+                    question, answer = row
+                    self.questions.append((question, answer))
+            # TODO: make sure it only shuffles one layer down
+            random.shuffle(self.questions)
 
 
 @bp.route("/")
@@ -89,28 +60,7 @@ def deck_play(deck_id: int):
 
     (path,) = path
     deck = Deck(path)
-    if request.method == "GET":
-        return render_template(
-            "content/quiz.html", question=deck.get_current_question(), id=deck_id
-        )
-    elif request.method == "POST":
-        user_answer = request.form["answer"]
-        is_correct = deck.check_answer(user_answer)
-        deck.update_score(is_correct)
-        next_question = deck.next_question()
-        if next_question:
-            return render_template(
-                "content/quiz.html", question=next_question(), deck=deck, id=deck_id
-            )
-        else:
-            # TODO: fix, this is to stop the form resubmitting when reloading on the result screen
-            score = deck.score
-            total = deck.deck_length()
-            return render_template(
-                "content/result.html",
-                score=score,
-                total=total,
-            )
+    questions: list[tuple] = deck.questions
 
 
 @bp.route("/settings", methods=["GET", "POST"])
