@@ -1,1 +1,18 @@
-{% extends "layout.html" %} {% block body%} {%endblock body%}
+{% extends "layout.html" %} {% block body%}
+<div class="flex flex-col items-center min-h-screen w-full gap-4">
+  <h1 class="font-bold text-2xl">Question</h1>
+  <p>{{ question }}</p>
+  <form class="flex flex-col gap-4" action="/deck/play/{{ id }}" method="post">
+    <input
+      class="input input-bordered input-primary w-full max-w-xs"
+      type="text"
+      name="answer"
+      required
+      autocomplete="off"
+    />
+    <button type="submit" class="btn btn-primary">Next</button>
+  </form>
+  {% if message %}
+  <p>{{ message }}</p>
+</div>
+{% endif %} {%endblock body%}

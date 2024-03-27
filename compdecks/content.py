@@ -62,6 +62,44 @@ def deck_play(deck_id: int):
     deck = Deck(path)
     questions: list[tuple] = deck.questions
 
+    # if it is a get, the user is going to the next question
+    session["question"] = 0
+    if session.get("question") >= len(questions):
+        return render_template(
+            "content/result.html", score=session.get("score"), total=len(questions)
+        )
+    if request.method == "GET":
+        if session.get("question") == 0:  # first load of the quiz
+            session["score"] = 0
+            session["question"] += 1
+            return render_template(
+                "content/question.html", question=questions[0][0], id=deck_id
+            )
+
+    if request.method == "POST":
+        # if session["question" == 0:
+        #     raise ValueError("This should NEVER happen")
+
+        # process answer
+        user_answer = request.form["answer"]
+        correct_answer = questions[session.get("question")][1]
+        # FIXME: dont do this
+        if user_answer.lower() == correct_answer.lower():
+            session["score"] += 1
+            session["question"] += 1
+            return render_template(
+                "content/question.html",
+                question=questions[session.get("question")][0],
+                id=deck_id,
+            )
+        else:
+            session["question"] += 1
+            return render_template(
+                "content/question.html",
+                question=questions[session.get("question")][0],
+                id=deck_id,
+            )
+
 
 @bp.route("/settings", methods=["GET", "POST"])
 def settings():
