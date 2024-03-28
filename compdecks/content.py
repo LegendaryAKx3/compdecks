@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, redirect, url_for
 
 from compdecks.auth import login_required
 from compdecks.db import get_db
@@ -78,6 +78,7 @@ def deck_play(deck_id: int):
             session.pop("question")
         if "score" in session:
             session.pop("score")
+
         return render_template(
             "content/question.html",
             id=deck_id,
@@ -91,17 +92,10 @@ def deck_play(deck_id: int):
         # TODO: remove check later
         if user_answer.lower() == correct_answer.lower():
             session["score"] += 1
-            print("CORRECT")
 
         if session["question"] >= len(questions) - 1:
-            score = session["score"]
-            session.pop("score", None)
-            session.pop("question", None)
-            del loaded_decks[session["user_id"]]
-            # TODO: save score to leaderboard
-            return render_template(
-                "content/result.html", score=score, total=len(questions)
-            )
+            # RESULT
+            return redirect(url_for("content.results"))
         else:
             session["question"] += 1
 
@@ -110,6 +104,26 @@ def deck_play(deck_id: int):
             id=deck_id,
             question=questions[session["question"]][0],
         )
+
+
+@bp.route("/result", methods=["GET"])
+def results():
+    score = None
+    if "score" in session:
+        score = session["score"]
+        session.pop("score", None)
+
+    if "question" in session:
+        session.pop("question", None)
+
+    if session["user_id"] in loaded_decks:
+        total = len(loaded_decks[session["user_id"]])
+        del loaded_decks[session["user_id"]]
+    else:
+        # still form bug with back button from home page.
+        return redirect("/")
+    # TODO: save score to leaderboard
+    return render_template("content/result.html", score=score, total=total)
 
 
 @bp.route("/settings", methods=["GET", "POST"])
