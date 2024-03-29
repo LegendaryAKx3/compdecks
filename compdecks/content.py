@@ -97,8 +97,15 @@ def deck_play(deck_id: int):
         if session["question"] >= len(questions) - 1:
             # RESULT
             # Record play and save score to leaderboard
-            username = db.execute("SELECT username FROM users WHERE id IS ?;", session["user_id"]).fetchone()
-            db.execute("insert into leaderboard (deck_id, username, score) (?, ?, ?);", deck_id, username, session["score"])
+            username = db.execute(
+                "SELECT username FROM users WHERE id IS ?;", session["user_id"]
+            ).fetchone()
+            db.execute(
+                "insert into leaderboard (deck_id, username, score) (?, ?, ?);",
+                deck_id,
+                username,
+                session["score"],
+            )
             db.execute("update decks plays = plays + 1 where id = ?;", deck_id)
             return redirect(url_for("content.results"))
         else:
