@@ -99,12 +99,13 @@ def deck_play(deck_id: int):
             # Record play and save score to leaderboard
             username = db.execute(
                 "SELECT username FROM users WHERE id IS ?", str(session["user_id"])
-            ).fetchone()
+            )
 
             db.execute(
-                "INSERT INTO leaderboards (deck_id, username, score) VALUES (?, ?, ?);",
-                (deck_id, str(username), session["score"]),
-            ).fetchone()
+                "INSERT INTO leaderboards (deck_id, username, score) VALUES (?, ?, ?)",
+                [deck_id, str(username), session["score"]],
+            )
+            db.commit()
 
             db.execute("UPDATE decks SET plays = plays + 1 WHERE id = ?;", (deck_id,))
 
