@@ -86,6 +86,7 @@ def deck_play(deck_id: int):
         )
 
     if request.method == "POST":
+        db = get_db()
         user_answer = request.form["answer"]
         correct_answer = questions[session["question"]][1]
 
@@ -95,6 +96,10 @@ def deck_play(deck_id: int):
 
         if session["question"] >= len(questions) - 1:
             # RESULT
+            # Record play and save score to leaderboard
+            username = db.execute("SELECT username FROM users WHERE id IS ?;", session["user_id"]).fetchone()
+            db.execute("insert into leaderboard (deck_id, username, score) (?, ?, ?);", deck_id, username, session["score"])
+            db.execute("update decks plays = plays + 1 where id = ?;", deck_id)
             return redirect(url_for("content.results"))
         else:
             session["question"] += 1
@@ -123,6 +128,7 @@ def results():
         # still form bug with back button from home page.
         return redirect("/")
     # TODO: save score to leaderboard
+
     return render_template("content/result.html", score=score, total=total)
 
 

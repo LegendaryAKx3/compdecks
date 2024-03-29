@@ -27,5 +27,5 @@ CREATE TABLE decks (
 CREATE TABLE leaderboards (
     deck_id INTEGER NOT NULL,
     username TEXT NOT NULL,
-    score INTEGER NOT NULL
+    score DEFAULT 0
 );
