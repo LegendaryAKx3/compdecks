@@ -98,15 +98,16 @@ def deck_play(deck_id: int):
             # RESULT
             # Record play and save score to leaderboard
             username = db.execute(
-                "SELECT username FROM users WHERE id IS ?;", session["user_id"]
+                "SELECT username FROM users WHERE id IS ?", str(session["user_id"])
             ).fetchone()
+
             db.execute(
-                "insert into leaderboard (deck_id, username, score) (?, ?, ?);",
-                deck_id,
-                username,
-                session["score"],
-            )
-            db.execute("update decks plays = plays + 1 where id = ?;", deck_id)
+                "INSERT INTO leaderboards (deck_id, username, score) VALUES (?, ?, ?);",
+                (deck_id, str(username), session["score"]),
+            ).fetchone()
+
+            db.execute("UPDATE decks SET plays = plays + 1 WHERE id = ?;", (deck_id,))
+
             return redirect(url_for("content.results"))
         else:
             session["question"] += 1
