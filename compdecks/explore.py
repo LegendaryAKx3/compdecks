@@ -25,8 +25,9 @@ class Deck:
 
 @bp.route("/explore")
 def explore():
-    # db = get_db()
-    return render_template("explore/explore.html")
+    db = get_db()
+    featDecks = db.execute("SELECT * FROM DECKS order by plays desc limit 5;")
+    return render_template("explore/explore.html", decks=featDecks)
 
 
 @bp.route("/search/", methods=["GET", "POST"])

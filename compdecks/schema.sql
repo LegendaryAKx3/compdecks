@@ -18,7 +18,8 @@ CREATE TABLE decks (
     name TEXT NOT NULL,
     description TEXT,
     file_path TEXT NOT NULL,
-    length INTEGER NOT NULL
+    length INTEGER NOT NULL,
+    plays INTEGER
 );
 
 
