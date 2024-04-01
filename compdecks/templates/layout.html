@@ -24,6 +24,7 @@
     <title>CompDecks | {% block title %}{% endblock %}</title>
   </head>
 
+  {% if g.user["username"] %}
   <div class="sticky top-0 z-10 w-full navbar bg-base-100">
     <div class="navbar-start">
       <div class="dropdown">
@@ -86,6 +87,7 @@
       </form>
     </div>
   </div>
+  {% endif %}
 
   <body class="h-screen flex flex-col">
     <div>
