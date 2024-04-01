@@ -52,9 +52,9 @@
           tabindex="0"
           class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
-          <li><a>Homepage</a></li>
-          <li><a>Portfolio</a></li>
-          <li><a>About</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="{{ url_for('explore.search') }}">Search</a></li>
+          <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
         </ul>
       </div>
     </div>
@@ -86,12 +86,7 @@
       </form>
     </div>
     {% if g.user %}
-    <div class="flex flex-row justify-between">
-      <a class="link link-primary" href="{{ url_for('auth.logout') }}"
-        >Log Out</a
-      >
-      <!-- <li>User: <span>{{ g.user['username'] }}</span></li> -->
-    </div>
+    <div class="flex flex-row justify-between"></div>
     {% endif %}
   </div>
 
