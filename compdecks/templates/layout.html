@@ -24,7 +24,7 @@
     <title>CompDecks | {% block title %}{% endblock %}</title>
   </head>
 
-  <div class="fixed top-0 z-10 w-full navbar bg-base-100">
+  <div class="sticky top-0 z-10 w-full navbar bg-base-100">
     <div class="navbar-start">
       <div class="dropdown">
         <div
@@ -87,7 +87,7 @@
     </div>
   </div>
 
-  <body>
+  <body class="h-screen flex flex-col">
     <div>
       {% if session["uuid"] %}
       <form action="/logout" method="get">
@@ -99,6 +99,6 @@
     <!--TODO: style flash class-->
     <div class="flash">{{ message }}</div>
     {% endfor %}
-    <div class="container mx-auto mt-16">{% block body %}{% endblock %}</div>
+    <div class="container mx-auto">{% block body %}{% endblock %}</div>
   </body>
 </html>
