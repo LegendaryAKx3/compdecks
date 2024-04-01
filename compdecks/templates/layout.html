@@ -24,7 +24,7 @@
     <title>CompDecks | {% block title %}{% endblock %}</title>
   </head>
 
-  <div class="navbar bg-base-100">
+  <div class="fixed top-0 w-full start-0 navbar bg-base-100">
     <div class="navbar-start">
       <div class="dropdown">
         <div
@@ -92,12 +92,6 @@
       >
       <!-- <li>User: <span>{{ g.user['username'] }}</span></li> -->
     </div>
-    {% else %}
-
-    <a class="link link-primary" href="{{ url_for('auth.register') }}"
-      >Register</a
-    >
-    <a href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
   </div>
 
