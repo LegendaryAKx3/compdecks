@@ -49,7 +49,7 @@ def deck_details(deck_id: int):
     db = get_db()
     deck = db.execute("SELECT * FROM decks WHERE id IS ?", (str(deck_id),)).fetchone()
     leaderboard = db.execute(
-        "select * from leaderboards where deck_id is ? order by score desc limit 8",
+        "select * from leaderboards where deck_id is ? order by score desc limit 6",
         (str(deck_id),),
     )
     return render_template(
@@ -107,6 +107,7 @@ def deck_play(deck_id: int):
             )
             db.execute("update decks set plays = plays + 1 where id = ?;", str(deck_id))
             db.commit()
+            session["id"] = deck_id
             return redirect(url_for("content.results"))
         else:
             session["question"] += 1
@@ -128,15 +129,18 @@ def results():
     if "question" in session:
         session.pop("question", None)
 
+    if "id" in session:
+        id = session["id"]
+        session.pop("id", None)
+
     if session["user_id"] in loaded_decks:
         total = len(loaded_decks[session["user_id"]])
         del loaded_decks[session["user_id"]]
     else:
         # still form bug with back button from home page.
         return redirect("/")
-    # TODO: save score to leaderboard
 
-    return render_template("content/result.html", score=score, total=total)
+    return render_template("content/result.html", score=score, total=total, id=id)
 
 
 @bp.route("/settings", methods=["GET", "POST"])

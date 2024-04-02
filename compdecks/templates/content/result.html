@@ -3,4 +3,7 @@
   <h1 class="font-bold text-2xl">Quiz Result</h1>
   <p>Your score: {{ score }}/{{ total }}</p>
 </div>
+<form action="/deck/{{ id }}" method="get">
+  <button type="submit" class="btn btn-outline btn-success">Continue</button>
+</form>
 {%endblock body%}
