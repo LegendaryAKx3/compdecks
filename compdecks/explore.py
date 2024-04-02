@@ -23,17 +23,14 @@ class Deck:
         return word.lower() in self.title.lower()
 
 
-
 @bp.route("/search/", methods=["GET", "POST"])
 def search():
     if request.method == "POST":
         templ = """
                 {% for deck in decks %}
                 <tr>
-                    <td>{{ deck.completed }}</td>
                     <th>{{ deck.name }}</td>
-                    <td>{{ deck.questions }}</td>
-                    <td>{{ deck.difficulty }}</td>
+                    <td>{{ deck.length }}</td>
                     <th>
                         <a
                             href="/deck/{{ deck.id }}"
