@@ -67,6 +67,11 @@ def init_data_command():
         (1, "Terry", 9),
         (2, "Steven", 10),
         (2, "Chris", 5),
+        (2, "Sandra", 5),
+        (3, "Ernie", 5),
+        (3, "Jane", 2),
+        (2, "Sarah", 1),
+        (2, "John", 5),
     ]
     decks_data = [
         (1, "Math Quiz", "A Math Deck", "compdecks/user_uploads/math.csv", 4),

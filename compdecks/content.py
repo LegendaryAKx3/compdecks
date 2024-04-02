@@ -49,7 +49,7 @@ def deck_details(deck_id: int):
     db = get_db()
     deck = db.execute("SELECT * FROM decks WHERE id IS ?", (str(deck_id),)).fetchone()
     leaderboard = db.execute(
-        "select * from leaderboards where deck_id is ? order by score desc limit 3",
+        "select * from leaderboards where deck_id is ? order by score desc limit 8",
         (str(deck_id),),
     )
     return render_template(
@@ -97,9 +97,14 @@ def deck_play(deck_id: int):
         if session["question"] >= len(questions) - 1:
             # RESULT
             # Record play and save score to leaderboard
-            username = db.execute("SELECT username FROM users WHERE id IS ?;", str(session["user_id"])).fetchall()
+            username = db.execute(
+                "SELECT username FROM users WHERE id IS ?;", str(session["user_id"])
+            ).fetchall()
             username = username[0]["username"]
-            db.execute("insert into leaderboards (deck_id, username, score) values (?, ?, ?);", (deck_id, username, session["score"]))
+            db.execute(
+                "insert into leaderboards (deck_id, username, score) values (?, ?, ?);",
+                (deck_id, username, session["score"]),
+            )
             db.execute("update decks set plays = plays + 1 where id = ?;", str(deck_id))
             db.commit()
             return redirect(url_for("content.results"))

@@ -3,7 +3,6 @@
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS decks;
-DROP TABLE IF EXISTS settings;
 DROP TABLE IF EXISTS leaderboards;
 
 CREATE TABLE users (
