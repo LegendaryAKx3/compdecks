@@ -32,7 +32,7 @@ class Deck:
 def index():
     db = get_db()
     featDecks = db.execute(
-        "SELECT * FROM DECKS order by plays desc limit 5;"
+        "SELECT * FROM DECKS order by plays desc limit 6;"
     ).fetchall()
     return render_template("content/index.html", decks=featDecks)
 

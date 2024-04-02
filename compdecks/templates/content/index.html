@@ -2,7 +2,7 @@
 body%}
 <div class="justify-center items-center">
   <header>
-    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <div class="mx-auto max-w-screen-xl px-4 pb-8 sm:px-6 sm:pb-12 lg:px-8">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div class="text-center sm:text-left">
           <h1 class="text-2xl font-bold sm:text-3xl">
@@ -20,8 +20,23 @@ body%}
     <div class="mb-4 sm:flex sm:items-center sm:justify-between">
       <h1 class="text-2xl font-bold sm:text-3xl">Featured</h1>
     </div>
-    <div class="flex flex-row gap-4">
+    <div class="grid grid-cols-3 grid-rows-2 gap-4">
       {% for deck in decks %}
+      <div class="card w-96 bg-neutral text-primary-content">
+        <div class="card-body">
+          <h2 class="card-title text-primary">{{ deck.name }}</h2>
+          <p class="font-medium text-base-content">{{ deck.description }}</p>
+          <div class="card-actions justify-end">
+            <form action="/deck/{{ deck.id }}" method="get">
+              <button type="submit" class="btn btn-primary">Play</button>
+            </form>
+          </div>
+          <!--badges-->
+          <div class="flex flex-row gap-4">
+            <div class="badge font-medium">{{ deck.length}} questions</div>
+          </div>
+        </div>
+      </div>
       <div class="card w-96 bg-neutral text-primary-content">
         <div class="card-body">
           <h2 class="card-title text-primary">{{ deck.name }}</h2>
