@@ -30,8 +30,11 @@ class Deck:
 @bp.route("/")
 @login_required
 def index():
-    # db = get_db()
-    return render_template("content/index.html", title="Hello")
+    db = get_db()
+    featDecks = db.execute(
+        "SELECT * FROM DECKS order by plays desc limit 5;"
+    ).fetchall()
+    return render_template("content/index.html", decks=featDecks)
 
 
 @bp.route("/create", methods=["GET", "POST"])

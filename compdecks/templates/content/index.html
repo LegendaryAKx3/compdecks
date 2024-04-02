@@ -28,6 +28,21 @@ body%}
     <div class="mb-4 sm:flex sm:items-center sm:justify-between">
       <h1 class="text-2xl font-bold sm:text-3xl">Featured</h1>
     </div>
+    <div class="flex flex-row gap-4">
+      {% for deck in decks %}
+      <div class="card w-96 bg-neutral text-primary-content">
+        <div class="card-body">
+          <h2 class="card-title text-primary">{{ deck.name }}</h2>
+          <p class="font-medium text-base-content">{{ deck.description }}</p>
+          <div class="card-actions justify-end">
+            <form action="/deck/{{ deck.id }}" method="get">
+              <button type="submit" class="btn">Play</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-  {% for deck in decks %} {{ deck.name }} {% endfor %} {%endblock body%}
+  {%endblock body%}
 </div>

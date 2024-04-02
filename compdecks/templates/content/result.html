@@ -1,9 +1,9 @@
 {% extends "layout.html" %} {% block body%}
-<div class="flex flex-col items-center w-full">
+<div class="flex flex-col items-center w-full gap-4">
   <h1 class="font-bold text-2xl">Quiz Result</h1>
   <p>Your score: {{ score }}/{{ total }}</p>
+  <form action="/deck/{{ id }}" method="get">
+    <button type="submit" class="btn btn-outline btn-success">Continue</button>
+  </form>
 </div>
-<form action="/deck/{{ id }}" method="get">
-  <button type="submit" class="btn btn-outline btn-success">Continue</button>
-</form>
 {%endblock body%}
