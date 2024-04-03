@@ -30,18 +30,6 @@ def close_db(e=None):
         db.close()
 
 
-def generate_csv(tup, filename) -> None:
-    """Write tuples to a csv file and save with
-    given filename within the /user_uploads folder
-    """
-    file = filename + ".csv"
-    file_path = os.path.join("./user_uploads", file)
-    with open(file_path, "w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerows(tup)
-    return
-
-
 def init_db():
     """Clear existing data and create new tables."""
     db = get_db()
