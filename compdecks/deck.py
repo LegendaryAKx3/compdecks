@@ -1,5 +1,6 @@
-from csv import reader
+import csv
 from random import shuffle
+import os
 
 
 class Deck:
@@ -9,7 +10,7 @@ class Deck:
 
     def load(self, path: str) -> None:
         with open(path, "r", newline="") as file:
-            rder = reader(file)
+            rder = csv.reader(file)
             for row in rder:
                 if len(row) == 2:
                     question, answer = row
