@@ -1,1 +1,45 @@
-{% macro feature_card(title, description, badges) %} {% endmacro %}
+{% macro feature_card(title, description, author, badges, id) %}
+<!-- Card -->
+<div
+  class="flex flex-col gap-6 bg-base-100 rounded-box p-6 max-w-xl justify-between shadow-xl"
+>
+  <!-- Header -->
+  <div class="flex justify-between items-center">
+    <!-- Body -->
+    <div class="flex flex-col gap-2">
+      <a class="text-xl font-bold link"> {{ title }} </a>
+
+      <span> {{ description }} </span>
+    </div>
+    {% for badge in badges %}
+    <span class="badge badge-outline">{{ badge }}</span>
+    {% endfor %}
+  </div>
+
+  <!-- Footer -->
+  <div class="flex justify-between items-center">
+    <div class="flex gap-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+        />
+      </svg>
+
+      {{ author }}
+    </div>
+    <a class="btn btn-ghost"> </a>
+    <form action="/deck/{{ id }}" method="get">
+      <button type="submit" class="btn btn-primary btn-sm">Play</button>
+    </form>
+  </div>
+</div>
+{% endmacro %}

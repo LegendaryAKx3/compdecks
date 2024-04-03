@@ -1,5 +1,5 @@
-{% extends "layout.html" %} {% block title %}Explore{% endblock %} {% block
-body%}
+{% from "content/_macros.html" import feature_card with context %} {% extends
+"layout.html" %} {% block title %}Explore{% endblock %} {% block body%}
 <div class="justify-center items-center">
   <header>
     <div class="mx-auto max-w-screen-xl px-4 pb-8 sm:px-6 sm:pb-12 lg:px-8">
@@ -21,23 +21,8 @@ body%}
       <h1 class="text-2xl font-bold sm:text-3xl">Featured</h1>
     </div>
     <div class="grid grid-cols-3 grid-rows-2 gap-4">
-      {% for deck in decks %}
-      <div class="card w-96 bg-base-100 shadow-2xl">
-        <div class="card-body">
-          <h2 class="card-title">{{ deck.name }}</h2>
-          <p class="font-medium">{{ deck.description }}</p>
-          <div class="card-actions justify-end">
-            <form action="/deck/{{ deck.id }}" method="get">
-              <button type="submit" class="btn btn-primary">Play</button>
-            </form>
-          </div>
-          <!--badges-->
-          <div class="card-actions justify-start">
-            <div class="badge badge-outline">{{ deck.length}} questions</div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
+      {% for deck in decks %} {{ feature_card(deck.name, deck.description,
+      'User', [deck.length ~ ' questions']) }} {% endfor %}
     </div>
   </div>
   {%endblock body%}
