@@ -2,29 +2,13 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 
 from compdecks.auth import login_required
 from compdecks.db import get_db
-import csv
-import random
+from compdecks.deck import Deck
 
 # content does not have a url_prefix
 bp = Blueprint("content", __name__)
 
 # better way? :FIXME:
 loaded_decks = {}
-
-
-class Deck:
-    def __init__(self, path: str):
-        self.questions: list[tuple] = []
-        self.load(path)
-
-    def load(self, path: str) -> None:
-        with open(path, "r", newline="") as file:
-            reader = csv.reader(file)
-            for row in reader:
-                if len(row) == 2:
-                    question, answer = row
-                    self.questions.append((question, answer))
-            random.shuffle(self.questions)
 
 
 @bp.route("/")

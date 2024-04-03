@@ -10,19 +10,6 @@ from compdecks.db import get_db
 bp = Blueprint("explore", __name__)
 
 
-class Deck:
-    def __init__(self, completed, title, questions, difficulty):
-        self.completed = completed
-        self.title = title
-        self.questions = questions
-        self.difficulty = difficulty
-
-    def search(self, word):
-        if word is None:
-            return False
-        return word.lower() in self.title.lower()
-
-
 @bp.route("/search/", methods=["GET", "POST"])
 def search():
     if request.method == "POST":
