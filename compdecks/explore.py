@@ -16,12 +16,13 @@ def search():
         templ = """
                 {% for deck in decks %}
                 <tr>
+                    <td>{{ deck.owner }}</td>
                     <th>{{ deck.name }}</td>
                     <td>{{ deck.length }}</td>
                     <th>
                         <a
                             href="/deck/{{ deck.id }}"
-                            class="btn btn-outline btn-primary"
+                            class="btn btn-outline btn-sm btn-primary"
                         >
                             Play
                         </a>

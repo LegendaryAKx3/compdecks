@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 
 from compdecks.auth import login_required
 from compdecks.db import get_db
-from compdecks.deck import Deck, id_to_user
+from compdecks.deck import Deck
 
 # content does not have a url_prefix
 bp = Blueprint("content", __name__)
