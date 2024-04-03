@@ -62,16 +62,16 @@ def init_data_command():
         (2, "John", 5),
     ]
     decks_data = [
-        (1, "Math Quiz", "A Math Deck", "compdecks/user_uploads/math.csv", 4),
+        ("Sarah", "Math Quiz", "A Math Deck", "compdecks/user_uploads/math.csv", 4),
         (
-            2,
+            "John",
             "History Trivia",
             "A History Deck",
             "compdecks/user_uploads/history.csv",
             4,
         ),
         (
-            1,
+            "Edwin",
             "Science Flashcards",
             "A Science Deck",
             "compdecks/user_uploads/science.csv",
@@ -79,7 +79,7 @@ def init_data_command():
         ),
     ]
     db.executemany(
-        "INSERT INTO decks (owner_id, name, description, file_path, length) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO decks (owner, name, description, file_path, length) VALUES (?, ?, ?, ?, ?)",
         decks_data,
     )
     db.executemany(

@@ -13,7 +13,7 @@ CREATE TABLE users (
 
 CREATE TABLE decks (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    owner_id INTEGER NOT NULL,
+    owner TEXT UNIQUE NOT NULL,
     name TEXT NOT NULL,
     description TEXT,
     file_path TEXT NOT NULL,

@@ -18,8 +18,6 @@ def index():
     featDecks = db.execute(
         "SELECT * FROM DECKS order by plays desc limit 6;"
     ).fetchall()
-    for deck in featDecks:
-        deck.owner_id = id_to_user(deck.owner_id)
     return render_template("content/index.html", decks=featDecks)
 
 
