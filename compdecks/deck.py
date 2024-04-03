@@ -1,7 +1,7 @@
 import csv
 from random import shuffle
 import os
-
+from compdecks.db import get_db
 
 class Deck:
     def __init__(self, path: str):
@@ -28,3 +28,10 @@ def write_csv(tup, filename: str) -> None:
         writer = csv.writer(f)
         writer.writerows(tup)
     return
+
+def id_to_user(id: int) -> str:
+    """retrieve username from id"""
+    db = get_db()
+    user = db.execute("SELECT username FROM users WHERE id IS ?", (id,)).fetchone()
+    return user
+

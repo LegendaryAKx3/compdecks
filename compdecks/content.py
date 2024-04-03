@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 
 from compdecks.auth import login_required
 from compdecks.db import get_db
-from compdecks.deck import Deck
+from compdecks.deck import Deck, id_to_user
 
 # content does not have a url_prefix
 bp = Blueprint("content", __name__)
@@ -18,6 +18,8 @@ def index():
     featDecks = db.execute(
         "SELECT * FROM DECKS order by plays desc limit 6;"
     ).fetchall()
+    for deck in featDecks:
+        deck.owner_id = id_to_user(deck.owner_id)
     return render_template("content/index.html", decks=featDecks)
 
 

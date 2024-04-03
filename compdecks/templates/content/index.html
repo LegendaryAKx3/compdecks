@@ -21,8 +21,8 @@
       <h1 class="text-2xl font-bold sm:text-3xl">Featured</h1>
     </div>
     <div class="grid grid-cols-3 grid-rows-2 gap-4">
-      {% for deck in decks %} {{ feature_card(deck.name, deck.description,
-      'User', [deck.length ~ ' questions']) }} {% endfor %}
+      {% for deck in decks %} {{ feature_card(deck.name, deck.description, ,
+      [deck.length ~ ' questions'], ) }} {% endfor %}
     </div>
   </div>
   {%endblock body%}
