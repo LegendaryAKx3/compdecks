@@ -1,38 +1,43 @@
 {% extends "layout.html" %} {% block title %}Login{% endblock %} {% block body
 %}
-<div>
-  <div class="h-screen w-full justify-center flex flex-col items-center">
-    <h1 class="text-2xl font-bold text-center mb-4">CompDecks</h1>
-    <form class="flex flex-col gap-2" action="/auth/login" method="post">
-      <input
-        required
-        class="input input-bordered w-full max-w-xs"
-        autocomplete="off"
-        autofocus
-        name="username"
-        placeholder="your@email.com"
-        type="text"
-        required
-      />
-      <input
-        required
-        class="input input-bordered w-full max-w-xs"
-        name="password"
-        placeholder="Enter your password"
-        type="password"
-        required
-      />
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+<div
+  class="flex md:h-screen flex-col gap-4 rounded-box bg-base-200 p-6 max-w-md mx-auto justify-center"
+>
+  <h1 class="text-3xl font-bold self-center">CompDecks</h1>
 
-    <div>
-      <br />
-      <!--make blue link-->
-      <p>
-        Don't have an account?
-        <a class="link link-primary" href="/auth/register">Sign Up</a>
-      </p>
+  <span class="self-center">
+    Don't have an account?
+    <a class="link link-secondary" href="/auth/register">Register</a>
+  </span>
+
+  <label class="form-control">
+    <div class="label">
+      <span class="label-text">Username</span>
     </div>
-  </div>
+
+    <input
+      class="input input-bordered"
+      required
+      autocomplete="off"
+      name="username"
+    />
+  </label>
+
+  <label class="form-control">
+    <div class="label">
+      <span class="label-text">Password</span>
+    </div>
+
+    <input
+      type="password"
+      class="input input-bordered"
+      required
+      autocomplete="off"
+      name="password"
+    />
+  </label>
+
+  <button class="btn btn-primary">Log in</button>
 </div>
+
 {% endblock %}
