@@ -6,11 +6,13 @@ from flask import (
 )
 
 from compdecks.db import get_db
+from compdecks.auth import login_required
 
 bp = Blueprint("explore", __name__)
 
 
 @bp.route("/search/", methods=["GET", "POST"])
+@login_required
 def search():
     if request.method == "POST":
         templ = """

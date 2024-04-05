@@ -22,6 +22,7 @@ def index():
 
 
 @bp.route("/create", methods=["GET", "POST"])
+@login_required
 def create_deck():
     if request.method == "GET":
         ...
@@ -32,6 +33,7 @@ def create_deck():
 
 
 @bp.route("/deck/<int:deck_id>", methods=["GET"])
+@login_required
 def deck_details(deck_id: int):
     db = get_db()
     deck = db.execute("SELECT * FROM decks WHERE id IS ?", (str(deck_id),)).fetchone()
@@ -46,6 +48,7 @@ def deck_details(deck_id: int):
 
 # does this need a seperate route getting the same info or can we somehow chain off the deck details?
 @bp.route("/deck/play/<int:deck_id>", methods=["GET", "POST"])
+@login_required
 def deck_play(deck_id: int):
 
     # load the deck and save into the in memory loaded decks
@@ -107,6 +110,7 @@ def deck_play(deck_id: int):
 
 
 @bp.route("/result", methods=["GET"])
+@login_required
 def results():
     score = None
     if "score" in session:
@@ -129,10 +133,6 @@ def results():
 
     return render_template("content/result.html", score=score, total=total, id=id)
 
-
-@bp.route("/settings", methods=["GET", "POST"])
-def settings():
-    return render_template("content/settings.html")
 
 
 def load_deck(deck_id: int) -> dict:
