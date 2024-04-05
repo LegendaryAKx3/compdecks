@@ -1,45 +1,58 @@
 {% extends "layout.html" %} {% block title %}Register{% endblock %} {% block
 body%}
-<div>
-  <div class="h-screen w-full justify-center flex flex-col items-center">
-    <h1 class="text-2xl font-bold text-center mb-4">CompDecks</h1>
-    <form class="flex flex-col gap-2" action="/auth/register" method="post">
-      <input
-        class="input input-bordered w-full max-w-xs"
-        autocomplete="off"
-        autofocus
-        name="username"
-        placeholder="Enter your username"
-        type="text"
-        required
-      />
-      <input
-        class="input input-bordered w-full max-w-xs"
-        name="password"
-        placeholder="Enter your password"
-        type="password"
-        required
-      />
-      <input
-        class="input input-bordered w-full max-w-xs"
-        name="confirmation"
-        placeholder="Confirmation"
-        type="password"
-        required
-      />
-      <!--change color?-->
-      <!--delete blue ring-->
-      <button type="submit" class="btn btn-primary">Register</button>
-    </form>
+<div class="md:h-screen max-w-md mx-auto justify-center content-center">
+  <form action="/auth/register" method="post">
+    <div class="flex flex-col gap-4 rounded-box bg-base-200 p-6 max-w-md">
+      <h1 class="text-3xl font-bold self-center">Create an account</h1>
 
-    <div>
-      <br />
-      <!--make blue link-->
-      <p>
+      <span class="self-center">
         Already have an account?
-        <a class="link link-primary" href="/auth/login">Log In</a>
-      </p>
+        <a class="link link-secondary" href="/auth/login">Log in</a>
+      </span>
+
+      <label class="form-control">
+        <div class="label">
+          <span class="label-text">Username</span>
+        </div>
+
+        <input
+          class="input input-bordered"
+          autocomplete="off"
+          name="username"
+          required
+        />
+      </label>
+
+      <label class="form-control">
+        <div class="label">
+          <span class="label-text">Password</span>
+        </div>
+
+        <input
+          type="password"
+          class="input input-bordered"
+          autocomplete="off"
+          name="password"
+          required
+        />
+      </label>
+
+      <label class="form-control">
+        <div class="label">
+          <span class="label-text">Confirm password</span>
+        </div>
+
+        <input
+          type="password"
+          class="input input-bordered"
+          autocomplete="off"
+          name="confirmation"
+          required
+        />
+      </label>
+
+      <button class="btn btn-primary">Create</button>
     </div>
-  </div>
+  </form>
 </div>
 {% endblock body%}
