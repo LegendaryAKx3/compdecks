@@ -28,7 +28,16 @@ def create_deck():
         ...
         # Figure out how csv file editing system will work
     elif request.method == "POST":
-        ...
+        db = get_db()
+        title = request.form["title"]
+        description = request.form["description"]
+        user = db.execute("select * from users where id is ?", (str(session["user_id"]))).fetchone()
+        #TODO how will the csv come through from the frontend?
+        # db.execute(
+        #         "insert into decks (owner, name, description, file_path, length) values (?, ?, ?);",
+        #         (user["username"], title, description, FILE_PATH, LENGTH),
+        #     )
+        redirect("/")
     return render_template("content/create.html")
 
 
