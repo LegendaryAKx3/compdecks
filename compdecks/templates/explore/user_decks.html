@@ -7,9 +7,9 @@ body%}
         <label for="Search" class="sr-only"> My Decks</label>
 
         <input
-          hx-target="#search-results"
+          hx-target="#deck-results"
           hx-trigger="input changed delay:150ms, search"
-          hx-post="/search/"
+          hx-post="/decks/"
           name="search"
           type="text"
           id="table-search"
@@ -53,7 +53,7 @@ body%}
           <th></th>
         </tr>
       </thead>
-      <tbody id="search-results"></tbody>
+      <tbody id="deck-results"></tbody>
     </table>
   </div>
 </div>
