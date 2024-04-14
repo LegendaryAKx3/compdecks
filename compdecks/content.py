@@ -55,7 +55,7 @@ def create_deck():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file_path = os.path.join("/user_uploads/", filename)
-            for filename in db.execute("select image from members;"):
+            for filename in db.execute("select file_path from decks;").fetchall():
                 if filename == file_path:
                     flash("File is already in database")
                     return redirect("/create")
