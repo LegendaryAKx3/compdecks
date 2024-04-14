@@ -1,8 +1,13 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash
 
 from compdecks.auth import login_required
 from compdecks.db import get_db
 from compdecks.deck import Deck
+
+from werkzeug.utils import secure_filename
+
+import os
+import csv
 
 # content does not have a url_prefix
 bp = Blueprint("content", __name__)
@@ -21,6 +26,10 @@ def index():
     return render_template("content/index.html", decks=featDecks)
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in {'csv'}
+
 @bp.route("/create", methods=["GET", "POST"])
 @login_required
 def create_deck():
@@ -32,11 +41,34 @@ def create_deck():
         title = request.form["title"]
         description = request.form["description"]
         user = db.execute("select * from users where id is ?", (str(session["user_id"]))).fetchone()
+
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect("/create")
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            return redirect("/create")
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file_path = os.path.join("/user_uploads/", filename)
+            for filename in db.execute("select image from members;"):
+                if filename == file_path:
+                    flash("File is already in database")
+                    return redirect("/create")
+            file.save(file_path)
+        
+        with open(filename) as f:
+            length = sum(1 for line in f)
+
         #TODO how will the csv come through from the frontend?
-        # db.execute(
-        #         "insert into decks (owner, name, description, file_path, length) values (?, ?, ?);",
-        #         (user["username"], title, description, FILE_PATH, LENGTH),
-        #     )
+        db.execute(
+                "insert into decks (owner, name, description, file_path, length) values (?, ?, ?, ?, ?);",
+                (user["username"], title, description, file_path, length),
+            )
         redirect("/")
     return render_template("content/create.html")
 
